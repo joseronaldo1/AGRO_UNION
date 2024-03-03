@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { actualizarAsignacion, registrarAsignacion, listarAsignacion, buscarAsignacion, estadoAsignacion } from "../controllers/controller.asignacion.js";
 
-import { asignacionA } from "../validate/asignacion.js";
-import { asignacionC } from "../validate/asignacion.js";
+import { asignacionA } from "../../validate/asignacion.js";
+import { asignacionC } from "../../validate/asignacion.js";
 
 
 const rutaAsignacion = Router();
