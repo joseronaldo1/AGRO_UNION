@@ -1,5 +1,5 @@
-import {pool} from './database/conexion.js';
-import { validationResult } from "express-validator";
+import {pool} from '../database/conexion.js'
+import { validationResult } from "express-validator"
 
 
 export const listarUsuarios = async (req, res) => {
@@ -42,51 +42,41 @@ export const buscarUsuario = async (req, res) => {
     }
 };
 
-export const registrarUsuario = async (req, res) => {
+export const registrarUsuarios = async (req, res) => {
+    try {
 
-    const errors = validationResult(req);
+        const errors = validationResult(req);
         if(!errors.isEmpty()){
             return res.status(400).json(errors)
         }
-    try {
-        const {nombres,apellidos,correo,contraseña,rol,estado} = req.body;
-
-            return res.status(400).json({
-                status: 400,
-                message: 'Los campos son requeridos'
-            });
         
+        const{nombres,apellidos,correo,password,rol,estado} = req.body
+        const[rows] = await pool.query(`INSERT INTO usuarios (nombres,apellidos,correo,password,rol,estado) values (?, ?, ?, ?, ?,?)`, [nombres,apellidos,correo,password,rol,estado])
 
-        const [result] = await pool.query('insert into usuarios ( nombres,apellidos,correo,contraseña,rol,estado) values (?, ?, ?, ?, ?, ?)', [nombres,apellidos,correo,contraseña,rol,estado]);
-        if (result.affectedRows > 0) {
+        if(rows.affectedRows>0){
             res.status(200).json({
-                status: 200,
-                "message": "Se registró con exito el usuario "+nombres
-            });
-        } else {
-            res.status(404).json({
-                status: 404,
-                "message": 'No se registró el usuario'
-            });
+                'status': 'Se registro con exito el usuario'+nombres
+            })
+        }else{
+            res.status(403).json({
+                'status': 403,
+                'message': 'No se registro el usuario'
+            })
         }
+
     } catch (error) {
         res.status(500).json({
-            status: 500,
-            message: error.message
-        });
+            'status': 500,
+            'message': 'Error del servidor' + error
+        })
     }
 }
 
 export const actualizarUsuario = async (req, res) => {
     try {
-        const { nombres,apellidos,correo,contraseña,rol,estado} = req.body;
-        const [result] = await pool.query(`UPDATE usuarios SET nombres=?, apellidos=?, contraseña=?, rol=?, estado=?`, [nombres,apellidos,correo,contraseña,rol,estado]);
+        const { nombres,apellidos,correo,password,rol,estado} = req.body;
+        const [result] = await pool.query(`UPDATE usuarios SET nombres=?, apellidos=?, password=?, rol=?, estado=?`, [nombres,apellidos,correo,password,rol,estado]);
          
-            return res.status(400).json({
-                status: 400,
-                message: 'Los campos son requeridos'
-            });
-        
 
         if (result.affectedRows >  0) {
             res.status(200).json({ 

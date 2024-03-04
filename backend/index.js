@@ -1,11 +1,12 @@
-import express from'express'
-import  body_parsere from 'body-parser'
+import express  from 'express' 
+import  body_parser from 'body-parser'
+
 
 
 const servidor = express()
 
-servidor.use(body_parsere.json())
-servidor.use(body_parsere.urlencoded({extended: false}))
+servidor.use(body_parser.json())
+servidor.use(body_parser.urlencoded({extended: false}))
 
 servidor.set('view engine', 'ejs');
 servidor.set('views','./views');

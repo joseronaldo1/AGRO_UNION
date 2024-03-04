@@ -1,11 +1,14 @@
 import { Router } from "express"
-import  {actualizarUsuario, listarUsuarios, buscarUsuario, desactivarUsuario, registrarUsuario} from '../controllers/contoller.usuario.js'
+import  {actualizarUsuario, listarUsuarios, buscarUsuario, desactivarUsuario, registrarUsuarios} from '../controllers/controller.usuarios.js'
+
+import {validarUsuario} from '../../validate/validate.usuarios.js'
+import { validarToken } from '../controllers/autenticacion.js'
 
 const rutaUsuario = Router();
 
 rutaUsuario.get('/listarUsuario', listarUsuarios);   
 rutaUsuario.get('/buscarUsuario/:id_usuario', buscarUsuario);
-rutaUsuario.post('/registrarUsuario', registrarUsuario);
+rutaUsuario.post('/registrarusuario', validarUsuario,registrarUsuarios);
 rutaUsuario.post('/desactivarUsuario/:id_usuario', desactivarUsuario);
 rutaUsuario.put('/actualizarUsuario/:id_usuario', actualizarUsuario);
 
