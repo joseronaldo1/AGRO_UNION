@@ -1,4 +1,5 @@
 import { pool } from "../database/conexion.js";
+import { validationResult } from "express-validator";
 
 export const listarProduccion = async (req, res) => {
     try {
@@ -17,6 +18,7 @@ export const listarProduccion = async (req, res) => {
             status: 500,
             message: 'error en el servidor',
         });
+        console.log(error);
     }
 };
 
@@ -38,7 +40,7 @@ export const registrarProduccion = async (req, res) => {
             });
         }
 
-        const [Registrar] = await pool.query('INSERT INTO asignaciones(cantidad_produccion,precio,fk_variedad_cultivo) Values(?,?,?)',
+        const [Registrar] = await pool.query('INSERT INTO produccion(cantidad_produccion,precio,fk_variedad_cultivo) Values(?,?,?)',
             [cantidad_produccion, precio, fk_variedad_cultivo]);
 
         if (Registrar.affectedRows > 0) {
@@ -57,6 +59,7 @@ export const registrarProduccion = async (req, res) => {
             status: 500,
             message: 'error en el servidor'
         });
+        console.log(error);
     }
 };
 
