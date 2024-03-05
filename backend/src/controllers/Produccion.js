@@ -95,46 +95,62 @@ export const actualizarProduccion = async (req, res) => {
         const { id_produccion } = req.params;
         const { cantidad_produccion, precio, fk_variedad_cultivo } = req.body;
 
+        // Validar que al menos uno de los campos esté presente
         if (!cantidad_produccion && !precio && !fk_variedad_cultivo) {
             return res.status(400).json({
-                message: 'se requiere uno de los campos para actualizar (cantidad , precio , variedad cultivo)'
+                message: 'Se requiere al menos uno de los campos para actualizar (cantidad, precio, variedad cultivo)'
             });
         }
 
-        const [addProduccion] = await pool.query('SELECT * FROM produccion WHERE id_produccion=?', [id_produccion]);
+        // Consultar el registro existente
+        const [existingProduccion] = await pool.query('SELECT * FROM produccion WHERE id_produccion=?', [id_produccion]);
 
-        if (addProduccion.length === 0) {
-            return res.status(400).json({ status: 400, message: 'Producción no encontrada' });
+        if (existingProduccion.length === 0) {
+            return res.status(404).json({ status: 404, message: 'Producción no encontrada' });
         }
 
-        const UpdateValue = {
-            cantidad_produccion: cantidad_produccion || addProduccion[0].cantidad_produccion,
-            precio: precio || addProduccion[0].precio,
-            fk_variedad_cultivo: fk_variedad_cultivo || addProduccion[0].fk_variedad_cultivo,
+        // Valores para la actualización
+        const updateValues = {
+            cantidad_produccion: cantidad_produccion || existingProduccion[0].cantidad_produccion,
+            precio: precio || existingProduccion[0].precio,
+            fk_variedad_cultivo: fk_variedad_cultivo || existingProduccion[0].fk_variedad_cultivo,
         };
 
-        const updateQuery = 'UPDATE produccion SET cantidad_produccion=?, precio=?, fk_variedad_cultivo=? WHERE id_produccion=?'; // Corregido el updateQuery
+        // Consulta de actualización con placeholders
+        const updateQuery = 'UPDATE produccion SET cantidad_produccion=?, precio=?, fk_variedad_cultivo=? WHERE id_produccion=?';
 
-        const [Actualiza] = await pool.query(updateQuery, [UpdateValue.cantidad_produccion, UpdateValue.precio, UpdateValue.fk_variedad_cultivo, id_produccion]); // Corregido el uso de UpdateValue
+        // Ejecutar la consulta con los valores y el id_produccion
+        const [result] = await pool.query(updateQuery, [
+            updateValues.cantidad_produccion,
+            updateValues.precio,
+            updateValues.fk_variedad_cultivo,
+            id_produccion  // id_produccion está incluido como parte de los parámetros
+        ]);
 
-        if (Actualiza.affectedRows > 0) {
+        // Manejar la respuesta
+        if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: Actualiza.changedRows > 0 ? 'se actualizó con éxito' : "Sin cambios realizados",
+                message: result.changedRows > 0
+                    ? `Producción con ID ${id_produccion} actualizada con éxito`
+                    : 'Sin cambios realizados',
             });
         } else {
-            res.status(400).json({
-                status: 400,
-                message: "No se encontraron resultados para la actualización",
+            res.status(404).json({
+                status: 404,
+                message: `No se encontraron resultados para la actualización con ID ${id_produccion}`,
             });
         }
     } catch (error) {
+        console.error(error); // Log del error para depuración
         return res.status(500).json({
             status: 500,
-            message: 'error en el servidor'
+            message: 'Error en el servidor',
         });
     }
 };
+
+
 
 export const eliminarProduccion = async (req, res) => {
     try {
@@ -171,3 +187,39 @@ export const eliminarProduccion = async (req, res) => {
         });
     }
 };
+
+
+
+
+//nesecito listar o buscar la infotmacion que ciando ponga ek fkk muestre nombre el numero del fk y la cantidad de produccion y el precio
+export const BuscarProduccionPlus = async (req, res) => {
+    try {
+        const { fk_variedad_cultivo } = req.body;
+
+        // Consulta para obtener información de producción y su variedad de cultivo asociada
+        const consultar = `
+        SELECT produccion.id_produccion, produccion.cantidad_produccion, produccion.precio, varidas.nombre_variedad
+        FROM produccion
+        JOIN varidas ON produccion.fk_variedad_cultivo = varidas.id_variedad
+        WHERE produccion.fk_variedad_cultivo LIKE ?;
+        `;
+
+        const [resultado] = await pool.query(consultar, [fk_variedad_cultivo]);
+
+        if (resultado.length > 0) {
+            return res.status(200).json({ resultado });
+        } else {
+            res.status(404).json({
+                status: 404,
+                message: "No se encontraron resultados para el fk_variedad_cultivo proporcionado",
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            status: 500,
+            message: "Error en el servidor",
+        });
+    }
+};
+
