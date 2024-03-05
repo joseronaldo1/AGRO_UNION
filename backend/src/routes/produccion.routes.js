@@ -4,9 +4,9 @@ import { BuscarPoduccion, actualizarProduccion, listarProduccion, registrarProdu
 
 const produccion = Router()
 
-produccion.get('/listarProduccion',listarProduccion)
-produccion.post('/RegistraProduccion',ValidateProduccion,registrarProduccion)
-produccion.get('/BuscarProduccion',BuscarPoduccion)
+produccion.get('/listarProduccion',listarProduccion),
+produccion.post('/RegistraProduccion',ValidateProduccion,registrarProduccion),
+produccion.get('/BuscarProduccion',BuscarPoduccion),
 produccion.put('/ActualizarProduccion',actualizar,actualizarProduccion)
 
 
