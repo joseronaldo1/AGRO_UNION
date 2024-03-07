@@ -94,7 +94,7 @@ export const Buscarlote = async (req, res) => {
     }
 }
 
-export const Desactivarlote = async (req, res) => {
+export const eliminarlote = async (req, res) => {
     try{
         const { id_lote } = req.params;
         const [ resultado ] = await pool.query("delete from lotes where id_lote=?", [id_lote])
@@ -112,5 +112,29 @@ export const Desactivarlote = async (req, res) => {
         res.status(500).json({
             "mensaje": error
         })
+    }
+}
+
+export const desactivarlote = async (req, res) => {
+    try {
+        const { id_lote } = req.params;
+        const [result] = await pool.query("UPDATE lotes SET estado='inactivo' WHERE id_lote=?", [id_lote]);
+        
+        if (result.affectedRows >  0) {
+            res.status(200).json({
+                status: 200,
+                "mensaje": "El lote con el id "+id_lote+" ha sido desactivado."
+            });
+        } else {
+            res.status(404).json({
+                status: 404,
+                "message": "No se pudo desactivar el lote"
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            status: 500,
+            message: 'Error en el sistema: '+error
+        });
     }
 }

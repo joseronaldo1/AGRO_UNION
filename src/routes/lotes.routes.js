@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Actualizarlote, Buscarlote, Desactivarlote, Registrarlotes, listarlotes } from "../controllers/lotes.controller.js";
+import { Actualizarlote, Buscarlote, Registrarlotes, desactivarlote, eliminarlote, listarlotes } from "../controllers/lotes.controller.js";
 import { validarlotes } from "../../validate/lotes.validacion.js";
 import {validarToken} from "../controllers/autenticacion.js"
 
@@ -9,7 +9,8 @@ rutalote.get("/listarlote",validarToken, listarlotes);
 rutalote.post("/Registrarlote",validarToken,validarlotes, Registrarlotes);
 rutalote.put("/Actualizarlote",validarToken,validarlotes, Actualizarlote);
 rutalote.get("/Buscarlote",validarToken, Buscarlote);
-rutalote.delete("/desactivarlote",validarToken, Desactivarlote);
+rutalote.delete("/eliminarlote",validarToken, eliminarlote);
+rutalote.put("/desactivarlote", validarToken, validarlotes, desactivarlote)
 
 
 export { rutalote };
