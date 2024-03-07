@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { registrarFinca,listarFinca, actualizarFinca, buscarFinca } from "../controllers/Finca.controller.js";
-import { validarFincaR } from "../validate/Finca.js";
-import { validarFincaA } from "../validate/Finca.js";
+import { validarFincaR } from "../../validate/Finca.js";
+import { validarFincaA } from "../../validate/Finca.js";
+
 import { validarToken} from "../controllers/autenticacion.js"
 
 
