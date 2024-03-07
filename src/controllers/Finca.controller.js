@@ -62,6 +62,10 @@ export const actualizarFinca = async (req, res) => {
         if(!errors.isEmpty()){
             return res.status(400).json(errors);
         }
+/// corrugei Actualizacion  deje registrar solo uno 
+
+// corrige que me esta borrando los datos al actualizar 
+
 
         const { id } = req.params;
         const { nombre_finca, longitud, latitud } = req.body;
