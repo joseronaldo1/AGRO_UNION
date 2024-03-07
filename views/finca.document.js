@@ -39,10 +39,10 @@
 
               incorrecto:
               status:404
-              body:{
-                status : 404
+              body:
+                status : 404{
                 "mensaje": "no se pudo mostar hay algun error"
-              }
+                }
 
               error:
               status:500
@@ -85,8 +85,8 @@
 
             incorrecto:
             status:404
-            body:{
-              status:404
+            body:
+              status:404{
               "mensaje": "hay un error no se pudo guardar"
             }
 
@@ -122,8 +122,8 @@
 
           incorrecto:
           status:404
-          body:{
-            status:404
+          body:
+            status:404{
             "mensaje": "No se pudo actualizar"
           }
 
@@ -166,8 +166,8 @@
 
         incorrecto:
         status:404
-        body:{
-          status:404
+        body:
+          status:404{
           "mensaje": "No se encontró nada con ese ID"
         }
 
@@ -203,8 +203,8 @@
 
         incorrecto:
         status:404
-        body:{
-          status:404
+        body:
+          status:404{
           "mensaje": "No se pudo desactivar"
         }
 
