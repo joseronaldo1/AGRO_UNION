@@ -1,4 +1,4 @@
-import {query} from 'express';
+
 import { pool } from '../database/conexion.js';
 import { validationResult } from 'express-validator';
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {registrar,  actualizar,  buscar, listar } from '../controller/controllerRecursos.js';
+import {registrar,  actualizar,  buscar, listar } from '../controllers/controllerRecursos.js';
 import {check} from 'express-validator';
 
 

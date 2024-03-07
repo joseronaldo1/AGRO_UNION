@@ -10,4 +10,4 @@ produccion.post('/RegistraProduccion',ValidateProduccion,registrarProduccion);
 produccion.get('/BuscarProduccion',BuscarProduccion);
 produccion.put('/ActualizarProduccion/id_produccion',actualizar,actualizarProduccion);
 
-export default produccion
+export {produccion}

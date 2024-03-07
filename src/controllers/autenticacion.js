@@ -1,5 +1,5 @@
 import { pool } from "../database/conexion.js";
-import jwt from "jsonwebtoken";
+import  Jwt  from "jsonwebtoken";
 
 export const validar = async (req, res) => {
 
@@ -9,7 +9,7 @@ export const validar = async (req, res) => {
         let sql = `SELECT * from usuarios where nombres='${nombres}' and password='${password}'`;
         const [rows] = await pool.query(sql)
         if (rows.length>0) {
-            let token=jwt.sign({rows},process.env.AUT_SECRET,{expiresIn:process.env.AUT_EXPIRE})
+            let token=Jwt.sign({rows},process.env.AUT_SECRET,{expiresIn:process.env.AUT_EXPIRE})
             return res.status(200).json({'nombres':rows, 'token':token,message:'token generado con exito'})
         }else{
             return res.status(404).json({"message":"Usuario no autorizado"})
@@ -30,7 +30,7 @@ export const validarToken = async (req, res, next) => {
         if(!tokenClient){
             return res.status(403).json({'message': 'Token es requerido'})
         }else{
-            const token = jwt.verify(tokenClient, process.env.AUT_SECRET, (error, decoded) => {
+            const token = Jwt.verify(tokenClient, process.env.AUT_SECRET, (error, decoded) => {
                 if(error){
                     return res.status(403).json({message: 'Token es obligatorio'})
                 }else{

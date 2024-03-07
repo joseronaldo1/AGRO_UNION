@@ -4,15 +4,15 @@ import { listarTipoRecurso, RegistroTipoRecurso, ActualizarTipoRecurso, BuscarTi
 import { validarTra } from "../../validate/tipo_recurso.js";
 import { validarTrr } from "../../validate/tipo_recurso.js";
 
-import {ValidarToken} from "../controllers/autenticacion.js";
+import { validarToken } from "../controllers/autenticacion.js";
 const rutaDeTipoRecurso = Router()
 
 //localhost:4000/VariedadCultivo
-rutaDeTipoRecurso.get("/listarRecurso", ValidarToken, listarTipoRecurso);
-rutaDeTipoRecurso.post("/RegistroRecurso", ValidarToken, validarTrr, RegistroTipoRecurso);
-rutaDeTipoRecurso.put("/actualizarRecurso/:id",ValidarToken ,validarTra, ActualizarTipoRecurso);
+rutaDeTipoRecurso.get("/listarRecurso", validarToken, listarTipoRecurso);
+rutaDeTipoRecurso.post("/RegistroRecurso", validarToken, validarTrr, RegistroTipoRecurso);
+rutaDeTipoRecurso.put("/actualizarRecurso/:id",validarToken ,validarTra, ActualizarTipoRecurso);
 /* rutaDeTipoRecurso.put("/desactivar/Recurso/:id", DesactivarTipoRecurso); */
-rutaDeTipoRecurso.get("/buscarRecurso/:id", ValidarToken, BuscarTipoRecurso);
+rutaDeTipoRecurso.get("/buscarRecurso/:id", validarToken, BuscarTipoRecurso);
 
 export { rutaDeTipoRecurso };
 

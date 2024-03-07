@@ -2,7 +2,13 @@ import express  from 'express'
 import  body_parser from 'body-parser'
 import routeUsuarios from './src/routes/routes.usuarios.js'
 import rutaValidacion from './src/routes/route.autenticacion.js'
-import costos from './src/routes/costos.routes.js';
+ import costos from './src/routes/costos.routes.js';
+import rutaFinca from './src/routes/Finca.routes.js';
+import { rutalote } from './src/routes/lotes.routes.js';
+import produccion from './src/routes/costos.routes.js';
+import rutaAsignacion from './src/routes/routes.asignacion.js';
+import rutaRecursos from './src/routes/routes.Recursos.js';
+import { rutaDeTipoRecurso } from './src/routes/TipoRecurso.route.js';
 
 const servidor = express()
 
@@ -20,6 +26,12 @@ servidor.get('/document',(req,res)=>{
 servidor.use('/usuarios', routeUsuarios)
 servidor.use(rutaValidacion)
 servidor.use(costos)
+servidor.use(rutaFinca)
+servidor.use(rutalote)
+servidor.use(produccion)
+servidor.use(rutaAsignacion)
+servidor.use(rutaRecursos)
+servidor.use(rutaDeTipoRecurso)
 
 servidor.listen(3000, () =>{
     console.log("esta funcionando")

@@ -1,14 +1,13 @@
 import { Router } from "express";
-import { ValidateProduccion,actualizar } from "../../validate/Produccion.js";
-import { BuscarProduccion, actualizarProduccion, listarProduccion, registrarProduccion } from "../controllers/Produccion.js";
+import { ValidateCostos, actualizar } from "../../validate/costos.js";
+import { BuscarCostos, actualizarCostos, listarCostos, registrarCostos} from "../controllers/Costos.js";
 
 const produccion = Router()
 
-produccion.get('/listarProduccion',listarProduccion),
-produccion.post('/RegistraProduccion',ValidateProduccion,registrarProduccion),
-produccion.get('/BuscarProduccion',BuscarProduccion),
-produccion.put('/ActualizarProduccion/:id_produccion',actualizar, actualizarProduccion);
-
+produccion.get('/listarCosto',listarCostos)
+produccion.post('/RegistrarCosto',ValidateCostos, registrarCostos)
+produccion.get('/BuscarCosto',BuscarCostos)
+produccion.put('/ActualizarCosto/:id_costos',actualizar, actualizarCostos)
 
 
 export default produccion
