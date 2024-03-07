@@ -75,7 +75,7 @@ export const registrarUsuarios = async (req, res) => {
 export const actualizarUsuario = async (req, res) => {
     try {
         const { nombres,apellidos,correo,password,rol,estado} = req.body;
-        const [result] = await pool.query(`UPDATE usuarios SET nombres=?, apellidos=?, password=?, rol=?, estado=?`, [nombres,apellidos,correo,password,rol,estado]);
+        const [result] = await pool.query(`UPDATE usuarios SET nombres=?, apellidos=?,correo=?, password=?, rol=?, estado=?`, [nombres,apellidos,correo,password,rol,estado]);
          
 
         if (result.affectedRows >  0) {

@@ -11,7 +11,5 @@ export const validarUsuario =
         check('rol', 'Rol no existe')
         .not().isEmpty().isIn(["administrador", "empleado"]),
 
-        check('correo', 'Correo invalido')
-        .isEmail().isEmpty()
 
     ]

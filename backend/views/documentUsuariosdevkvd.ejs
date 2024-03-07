@@ -14,7 +14,7 @@
   <tr><td>URI</td>  <td>http://localhost:3000/listarUsuario</td></tr>
   <tr><td>Descripcion</td>  <td>Permite listar los usuarios registrados en la base de datos</td></tr>
   <tr><td>Verbo HTTP</td>  <td>Verbo Get</td></tr>
-  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Header</td>  <td>Autorización token</td></tr>
   <tr><td>Request json</td>  <td></td></tr>
   <tr><td>Respuesta json</td>  <td>
     Correcto:
@@ -51,7 +51,7 @@
   <tr><td>URI</td>  <td>http://localhost:3000/registrarusuario</td></tr>
   <tr><td>Descripcion</td>  <td>Permite Registrar los usuarios registrados en la base de datos</td></tr>
   <tr><td>Verbo HTTP</td>  <td>Verbo POST</td></tr>
-  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Header</td>  <td>Autorización token</td></tr>
   <tr><td>Request json</td> <td>{
     "nombres": "",
     "apellidos": ,
@@ -91,7 +91,7 @@
   <tr><td>URI</td>  <td>http://localhost:3000/dasactivarUsuario/id_usuario</td></tr>
   <tr><td>Descripcion</td>  <td>Permite desactivar usuarios en la base de datos</td></tr>
   <tr><td>Verbo HTTP</td>  <td>Verbo POST</td></tr>
-  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Header</td>  <td>Autorización token</td></tr>
   <tr><td>Request json</td>  <td> </td></tr>
   <tr><td>Respuesta json</td>  <td>
     Correcto:
@@ -126,7 +126,7 @@ Status: 500 Internal Server Error
   <tr><td>URI</td>  <td>http://localhost:3000/actualizarUsuario/id_usuario</td></tr>
   <tr><td>Descripcion</td>  <td>Permite Actualizar el usuario registrado en la base de datos</td></tr>
   <tr><td>Verbo HTTP</td>  <td>Verbo PUT</td></tr>
-  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Header</td>  <td>Autorización token</td></tr>
   <tr><td>Request json</td>  <td>{
         "nombres": "lucia Martha",
         "apellidos":"diaz guevara",
@@ -164,7 +164,7 @@ Status: 500 Internal Server Error
   <tr><td>URI</td>  <td>http://localhost:3000/buscarUsuario/id_usuario</td></tr>
   <tr><td>Descripcion</td>  <td>Permite buscar usuarios registrados en la base de datos</td></tr>
   <tr><td>Verbo HTTP</td>  <td>Verbo Get</td></tr>
-  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Header</td>  <td>Autorización token</td></tr>
   <tr><td>Request json</td>  <td></td></tr>
   <tr><td>Respuesta json</td>  <td>
     Correcto:
