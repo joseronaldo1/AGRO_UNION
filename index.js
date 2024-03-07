@@ -2,7 +2,8 @@ import express  from 'express'
 import  body_parser from 'body-parser'
 import routeUsuarios from './src/routes/routes.usuarios.js'
 import rutaValidacion from './src/routes/route.autenticacion.js'
-import produccion from './src/routes/produccion.routes.js';
+import costos from './src/routes/costos.routes.js';
+
 const servidor = express()
 
 servidor.use(body_parser.json())
@@ -18,7 +19,7 @@ servidor.get('/document',(req,res)=>{
 
 servidor.use('/usuarios', routeUsuarios)
 servidor.use(rutaValidacion)
-servidor.use(produccion);
+servidor.use(costos)
 
 servidor.listen(3000, () =>{
     console.log("esta funcionando")
