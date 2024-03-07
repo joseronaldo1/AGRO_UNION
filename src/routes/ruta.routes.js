@@ -1,5 +1,7 @@
-<<<<<<< HEAD
+
 console.log("tin...");
-=======
+
 console.log("tin...");
->>>>>>> devsdv
+
+console.log("tin...");
+
