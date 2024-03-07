@@ -10,7 +10,7 @@ rutalote.post("/Registrarlote",validarToken,validarlotes, Registrarlotes);
 rutalote.put("/Actualizarlote",validarToken,validarlotes, Actualizarlote);
 rutalote.get("/Buscarlote",validarToken, Buscarlote);
 rutalote.delete("/eliminarlote",validarToken, eliminarlote);
-rutalote.put("/desactivarlote", validarToken, validarlotes, desactivarlote)
+rutalote.put("/desactivarlote", validarToken, desactivarlote)
 
 
 export { rutalote };
