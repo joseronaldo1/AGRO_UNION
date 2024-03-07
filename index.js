@@ -1,6 +1,6 @@
 import express from'express'
 import  body_parsere from 'body-parser'
-import produccion from './src/routes/produccion.routes.js';
+import produccion from './src/routes/costos.routes.js';
 
 const servidor = express()
 
