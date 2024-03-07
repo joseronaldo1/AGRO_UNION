@@ -183,12 +183,12 @@
 </table>
 
 <hr>
-<h3>Requerimiento 5. desactivar Lotes</h3>
+<h3>Requerimiento 5. eliminarlote Lotes</h3>
 <table>
   <tr><td>NUMERO</td><td>5</td></tr>
-  <tr><td>NOMBRE DEL SERVICIO</td><td>desactivarlote</td></tr>
+  <tr><td>NOMBRE DEL SERVICIO</td><td>eliminarlotelote</td></tr>
   <tr><td>URI</td><td>/desactivarlote/1</td></tr>
-  <tr><td>DESCRIPCION</td><td>permite desactivar la informacion registrada en la base de datos</td></tr>
+  <tr><td>DESCRIPCION</td><td>permite eliminarlote la informacion registrada en la base de datos</td></tr>
   <tr><td>VERBO HTTP</td><td>DELETE</td></tr>
   <tr><td>HEADER</td><td>null</td></tr>
   <tr><td>USUARIO</td><td>administrador</td></tr>
@@ -219,5 +219,42 @@
   <tr>RAMA HITHUB<td></td><td> devkfm </td></tr>
 </table>
     
+<h3>Requerimiento 6. desactivarlote Lotes</h3>
+<table>
+  <tr><td>NUMERO</td><td>5</td></tr>
+  <tr><td>NOMBRE DEL SERVICIO</td><td>desactivarlote</td></tr>
+  <tr><td>URI</td><td>/desactivarlote/1</td></tr>
+  <tr><td>DESCRIPCION</td><td>permite desactivarlote la informacion registrada en la base de datos</td></tr>
+  <tr><td>VERBO HTTP</td><td>PUT</td></tr>
+  <tr><td>HEADER</td><td>null</td></tr>
+  <tr><td>USUARIO</td><td>administrador</td></tr>
+  <tr><td>REUEST json/ PETICION BODY</td><td></td></tr>
+  <tr><td>RESPUESTA json</td><td>
+      correcto:
+      status:200
+      json:
+        status: 200,{
+                "mensaje": "El lote con el id "+id_lote+" ha sido desactivado."
+            };
+
+        incorrecto:
+        status:404
+        json:
+        {
+          "message": "No se pudo desactivar el lote"
+        }
+        
+        error
+        status:500
+        json:
+        {
+            message: 'Error en el sistema: '+error
+        }
+    
+  </td></tr>
+  <tr>REALIZACION DE ACTIVIDAD<td></td><td>KEVIN FERNANDO ANDRADE MAHECHA </td></tr>
+  <tr>RAMA HITHUB<td></td><td> devkfm </td></tr>
+</table>
+
 </body>
 </html>
