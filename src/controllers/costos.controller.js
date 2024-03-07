@@ -17,6 +17,7 @@ export const listarCostos = async (req, res) => {
         res.status(500).json({
             status: 500,
             message: 'error en el servidor',
+            error: error.message
         });
     }
 };
