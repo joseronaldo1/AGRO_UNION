@@ -4,77 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>131</title>
-    <link rel="stylesheet" href="/public/style.css">
+    <link rel="stylesheet" href="../public/style.css">
 </head>
 <body>
-    <h1>Documentación de la API de Fincas</h1>
-    <br>
+    <h1>Documentación de la API COSTOS</h1>
     <hr>
-    <h3>Requerimiento 1. Documentación ENDPOINT REGISTRAR FINCAS</h3>
+    <h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR COSTOS</h3>
     <table>
         <tr><td>Número</td> <td>1</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Registrar Finca</td></tr>
-        <tr><td>URL</td>  <td>/registrarFinca</td></tr>
-        <tr><td>Descripción</td>  <td>Permite registrar una nueva finca en la base de datos</td></tr>
-        <tr><td>Método HTTP</td>  <td>POST</td></tr>
+        <tr><td>Nombre del Servicio</td> <td>Registrar costos</td></tr>
+        <tr><td>URL</td>  <td>/registrarCosto</td></tr>
+        <tr><td>Descripción</td>  <td>Permite registrar un nuevo costo en la base de datos</td></tr>
+        <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Usuarios</td>  <td>Administrador, Líder</td></tr>
-        <tr><td>Request json</td>  <td>{"nombre_finca": "Nombre de la Finca", "longitud": -74.123456, "latitud": 4.56789}</td></tr>
-        <tr><td>Respuesta json</td>  <td>	
+        <tr><td>Request json</td>  <td>{
+            "fk_id_lotes": 1,
+            "fk_id_recursos": 1,
+            "egresos":756.8656
+        }</td></tr>
+        <tr><td>Respuesta json</td>  <td>   
         Correcto: 
         Status: 200
         json:
-        {
+        { 
             "status": 200,
-            "message": "Se registró con éxito la finca"
+            "message": "se Registró correctamente",
         }
+
+        <tr><td>Respuesta json</td>  <td>   
+            validacion: 
+            Status: 400
+            json:
+            { 
+                "status": 400,
+                "message": "campos obligatorios",
+            }
     <br>
     Incorrecto:
     
-    Status: 404
-    json:
-    {
-        "status": 404,
-        "message": "No se registró la finca"
+    Status:  400
+    body:{
+        "status":  403,
+        "message" : "No se ha podido registrar"
     }
     <br>
     Error: 
     
     Status: 500 
     json: {
-        "status": 500,
-        "message": "Error en el sistema"
+        status: 500,
+        "message" : "error en el servidor"
     }
     </td></tr>
-    <tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
-    
-    <h3>Requerimiento 2. Documentación ENDPOINT ACTUALIZAR FINCAS</h3>
+    <br>
+    <h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR COSTOS</h3>
     <table>
         <tr><td>Número</td> <td>2</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Actualizar Finca</td></tr>
-        <tr><td>URL</td>  <td>/actualizarFinca/:id</td></tr>
-        <tr><td>Descripción</td>  <td>Permite actualizar la información de una finca existente en la base de datos por medio de su id</td></tr>
-        <tr><td>Método HTTP</td>  <td>PUT</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Actualizar costos</td></tr>
+        <tr><td>URL</td>  <td>/ActualizarCosto/:id_costos</td></tr>
+        <tr><td>Descripción</td>  <td>Permite actualizar un costo existente en la base de datos</td></tr>
+        <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Usuarios</td>  <td>Administrador, Líder</td></tr>
-        <tr><td>Request json</td>  <td>{"nombre_finca": "Nuevo Nombre", "longitud": -75.123456, "latitud": 3.56789}</td></tr>
-        <tr><td>Respuesta json</td>  <td>	
+        <tr><td>Request json</td>  <td>{
+            "fk_id_lotes": 1,
+            "fk_id_recursos": 1,
+            "egresos":34.000
+        }</td></tr>
+        <tr><td>Respuesta json</td>  <td>   
         Correcto: 
         Status: 200
         json:
         {
             "status": 200,
-            "message": "Se actualizó con éxito la finca"
+            "message": "ha sido actualizado",
         }
     <br>
     Incorrecto:
     
     Status: 404
-    json:
-    {
+    body:{
         "status": 404,
-        "message": "No se encontró la finca para actualizar"
+        "message" : "costo no encontrado"
     }
     <br>
     Error: 
@@ -82,43 +96,92 @@
     Status: 500 
     json: {
         "status": 500,
-        "message": "Error en el sistema"
+        "message" : "Error interno del servidor"
     }
     </td></tr>
-    <tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     
-
-    <h3>Requerimiento 3. Documentación ENDPOINT BUSCAR FINCAS</h3>
+    <h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR UN COSTO</h3>
     <table>
-        <tr><td>Número</td> <td>3</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Buscar Finca</td></tr>
-        <tr><td>URL</td>  <td>/buscarFinca/:id</td></tr>
-        <tr><td>Descripción</td>  <td>Permite buscar una finca por su id en la base de datos</td></tr>
-        <tr><td>Método HTTP</td>  <td>GET</td></tr>
+        <tr><td>Número</td> <td>4</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Buscar un costo</td></tr>
+        <tr><td>URL</td>  <td>/BuscarCosto</td></tr>
+        <tr><td>Descripción</td>  <td>Permite buscar un costo por su id en la base de datos</td></tr>
+        <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Usuarios</td>  <td>Administrador, Líder, Aprendiz</td></tr>
+        <tr><td>Request json</td>  <td>{
+            "id_costos":1
+        }</td></tr>
+        <tr><td>Respuesta json</td>  <td>   
+        Correcto: 
+        Status: 200
+        json:
+        {
+            "resultado": [
+                {
+                    "id_costos": 1,
+                    "fk_id_lotes": 1,
+                    "fk_id_recursos": 1,
+                    "egresos": 77
+                }
+            ]
+        }
+    <br>
+    Incorrecto:
+    
+    Status: 404
+    body:{
+        "status": 404,
+        "message" : "No se encontraron resultados"
+    }
+    <br>
+    Error: 
+    
+    Status: 500 
+    json: {
+        "status": 500,
+        "message" : Error
+    }
+    </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
+    </table>
+    <h3>Requerimiento 5. Documentacion ENDPOINT LISTAR COSTOS</h3>
+    <table>
+        <tr><td>Número</td> <td>5</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Listar costos</td></tr>
+        <tr><td>URL</td>  <td>/usuarios</td></tr>
+        <tr><td>Descripción</td>  <td>Permite obtener una lista de todos los costos registradas en la base de datos</td></tr>
+        <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
+        <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>Null</td></tr>
-        <tr><td>Respuesta json</td>  <td>
+        <tr><td>Respuesta json</td>  <td>   
         Correcto: 
         Status: 200
         json:
         [
-        {
-          "id_finca": 1,
-          "nombre_finca": "Nombre de la Finca",
-          "longitud": -74.123456,
-          "latitud": 4.56789
-        }
-      ]
+	{
+		"id_costos": 1,
+		"fk_id_lotes": 1,
+		"fk_id_recursos": 1,
+		"egresos": 77
+	},
+	{
+		"id_costos": 28,
+		"fk_id_lotes": 1,
+		"fk_id_recursos": 1,
+		"egresos": 756.866
+	}
+]
     <br>
     Incorrecto:
     
     Status: 404
-    json:
-    {
+    body:{
         "status": 404,
-        "message": "No se encontraron resultados para la búsqueda"
+        "message" : "no hay ningun costo"
     }
     <br>
     Error: 
@@ -126,61 +189,25 @@
     Status: 500 
     json: {
         "status": 500,
-        "message": "Error en el sistema"
+        "message" : Error
     }
     </td></tr>
-    <tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
-
-    <h3>Requerimiento 4. Documentación ENDPOINT LISTAR FINCAS</h3>
-    <table>
-        <tr><td>Número</td> <td>4</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Listar Fincas</td></tr>
-        <tr><td>URL</td>  <td>/listarFinca</td></tr>
-        <tr><td>Descripción</td>  <td>Permite listar todas las fincas registradas en la base de datos</td></tr>
-        <tr><td>Método HTTP</td>  <td>GET</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Usuarios</td>  <td>Administrador, Líder, Aprendiz</td></tr>
-        <tr><td>Request json</td>  <td>Null</td></tr>
-        <tr><td>Respuesta json</td>  <td>	
-        Correcto: 
-        Status: 200
-        json: 
-        [
-  {
-    "id_finca": 1,
-    "nombre_finca": "Nombre de la Finca",
-    "longitud": -74.123456,
-    "latitud": 4.56789,
-  },
-  {
-    "id_finca": 2,
-    "nombre_finca": "Nuevo Nombre",
-    "longitud": -75.1235,
-    "latitud": 3.56789
-  }
-  ]
     <br>
-    Incorrecto:
-    
-    Status: 404
-    json:
-    {
-        "status": 404,
-        "message": "No se encontraron fincas"
-    }
+    <%- include('../views/document_devdfg') %>
     <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        "status": 500,
-        "message": "Error en el sistema"
-    }
-    </td></tr>
-    <tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-    </table>
-    
+    <%- include('../views/document_deveag') %>
+    <br>
+    <%- include('../views/Document_PAP') %>
+    <br>
+    <%- include('../views/documentAsignacion') %>
+    <br>
+    <%- include('../views/documentRecursosSdva') %>
+    <br>
+    <%- include('../views/documentUsuariosdevkvd') %>
+    <br>
+    <%- include('../views/fincadocument') %>
 
 </body>
 </html>
