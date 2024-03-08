@@ -1,0 +1,32 @@
+.header {
+    background-color: rgb(0, 141, 0);
+    color: white;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.menu {
+    margin-left: 35px;
+    font-size: 1.3em;
+    cursor: pointer;
+}
+
+
+
+
+.app-container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+
+}
+
+.content {
+    flex: 1;
+}
