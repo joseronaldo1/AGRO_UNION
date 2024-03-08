@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/estilos.css">
+    <link rel="stylesheet" href="../public/style.css">
     <title>Documentación de la api auto registrer</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
         <tr><td>URI</td><td>/listarlote</td></tr>
         <tr><td>DESCRIPCION</td><td>permite listar a los lotes registrados en la base de datos</td></tr>
         <tr><td>VERBO HTTP</td><td>GET</td></tr>
-        <tr><td>HEADER</td><td>null</td></tr>
+        <tr><td>HEADER</td><td>Token</td></tr>
         <tr><td>USUARIO</td><td>administrador</td></tr>
         <tr><td>REUEST json/ PETICION BODY</td><td></td></tr>
         <tr><td>RESPUESTA json</td><td>
@@ -63,7 +63,7 @@
       <tr><td>URI</td><td>/Registrarlote</td></tr>
       <tr><td>DESCRIPCION</td><td>permite crear lotes subiendolos a la base de datos</td></tr>
       <tr><td>VERBO HTTP</td><td>post</td></tr>
-      <tr><td>HEADER</td><td>null</td></tr>
+      <tr><td>HEADER</td><td>Token</td></tr>
       <tr><td>USUARIO</td><td>administrador</td></tr>
       <tr><td>REUEST json/ PETICION BODY</td><td>
         { 
@@ -109,7 +109,7 @@
     <tr><td>URI</td><td>/Actualizarlote/1</td></tr>
     <tr><td>DESCRIPCION</td><td>permite modificar informacion en las programaciones registradas en la base de datos</td></tr>
     <tr><td>VERBO HTTP</td><td>PUT</td></tr>
-    <tr><td>HEADER</td><td>null</td></tr>
+    <tr><td>HEADER</td><td>Token</td></tr>
     <tr><td>USUARIO</td><td>administrador</td></tr>
     <tr><td>REUEST json/ PETICION BODY</td><td>{"nombre":"casa juncal" }</td></tr>
     <tr><td>RESPUESTA json</td><td>
@@ -146,7 +146,7 @@
   <tr><td>URI</td><td>/Buscarlote/1</td></tr>
   <tr><td>DESCRIPCION</td><td>permite mostar datos especificos registrados en la base de datos</td></tr>
   <tr><td>VERBO HTTP</td><td>GET</td></tr>
-  <tr><td>HEADER</td><td>null</td></tr>
+  <tr><td>HEADER</td><td>Token</td></tr>
   <tr><td>USUARIO</td><td>administrador</td></tr>
   <tr><td>REUEST json/ PETICION BODY</td><td></td></tr>
   <tr><td>RESPUESTA json</td><td>
@@ -183,14 +183,14 @@
 </table>
 
 <hr>
-<h3>Requerimiento 5. eliminarlote Lotes</h3>
+<h3>Requerimiento 5. eliminar Lotes</h3>
 <table>
   <tr><td>NUMERO</td><td>5</td></tr>
   <tr><td>NOMBRE DEL SERVICIO</td><td>eliminarlotelote</td></tr>
   <tr><td>URI</td><td>/desactivarlote/1</td></tr>
   <tr><td>DESCRIPCION</td><td>permite eliminarlote la informacion registrada en la base de datos</td></tr>
   <tr><td>VERBO HTTP</td><td>DELETE</td></tr>
-  <tr><td>HEADER</td><td>null</td></tr>
+  <tr><td>HEADER</td><td>Token</td></tr>
   <tr><td>USUARIO</td><td>administrador</td></tr>
   <tr><td>REUEST json/ PETICION BODY</td><td></td></tr>
   <tr><td>RESPUESTA json</td><td>
@@ -219,14 +219,14 @@
   <tr>RAMA HITHUB<td></td><td> devkfm </td></tr>
 </table>
     
-<h3>Requerimiento 6. desactivarlote Lotes</h3>
+<h3>Requerimiento 6. desactivar Lotes</h3>
 <table>
   <tr><td>NUMERO</td><td>5</td></tr>
   <tr><td>NOMBRE DEL SERVICIO</td><td>desactivarlote</td></tr>
   <tr><td>URI</td><td>/desactivarlote/1</td></tr>
   <tr><td>DESCRIPCION</td><td>permite desactivarlote la informacion registrada en la base de datos</td></tr>
   <tr><td>VERBO HTTP</td><td>PUT</td></tr>
-  <tr><td>HEADER</td><td>null</td></tr>
+  <tr><td>HEADER</td><td>Token</td></tr>
   <tr><td>USUARIO</td><td>administrador</td></tr>
   <tr><td>REUEST json/ PETICION BODY</td><td></td></tr>
   <tr><td>RESPUESTA json</td><td>

@@ -1,19 +1,16 @@
 import { Router } from "express";
-import { Actualizarlote, Buscarlote, Desactivarlote, Registrarlotes, listarlotes } from "../controllers/lotes.controller.js";
-import { validarlotes } from "../../validate/lotes.validacion.js";
+import { Actualizarlote, Buscarlote,  Registrarlotes, desactivarlote, listarlotes } from "../controllers/lotes.controller.js";
+import { validarlotes, validarlotesactualizar } from "../../validate/lotes.validacion.js";
+import { validarToken } from "../controllers/autenticacion.js";
 
 const rutalote = Router();
 
-rutalote.get("/listarlote", listarlotes);
-rutalote.post("/Registrarlote",validarlotes, Registrarlotes);
-//nesecita llamar id 
-rutalote.put("/Actualizarlote",validarlotes, Actualizarlote);
-rutalote.get("/Buscarlote", Buscarlote);
+rutalote.get("/listarlote",validarToken, listarlotes);
+rutalote.post("/Registrarlote",validarToken,validarlotes, Registrarlotes);
+rutalote.put("/Actualizarlote/:id_lote",validarToken,validarlotesactualizar, Actualizarlote);
+rutalote.get("/Buscarlote/:id_lote",validarToken, Buscarlote);
+rutalote.delete("/desactivarlote/:id_lote",validarToken, desactivarlote);
 
-// creo que todos no estamos manejando delet solo put 
-//para que desactiove no estamos eliminando como tal 
-//pero comunicate con los compañeros y base de datos 
-rutalote.delete("/desactivarlote", Desactivarlote);
 
 
 export default rutalote ;

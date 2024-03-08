@@ -5,7 +5,6 @@ import rutaValidacion from './src/routes/route.autenticacion.js'
 import costos from './src/routes/costos.routes.js';
 import rutaFinca from './src/routes/Finca.routes.js';
 import rutalote from './src/routes/lotes.routes.js';
-import { rutaDeActividad } from './src/routes/Actividad.route.js';
 import rutaAsignacion from './src/routes/routes.asignacion.js';
 import rutaRecursos from './src/routes/routes.Recursos.js';
 import { rutaDeTipoRecurso } from './src/routes/TipoRecurso.route.js';
