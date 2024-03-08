@@ -24,6 +24,8 @@ servidor.get('/document',(req,res)=>{
     res.render('documentdevjrl.ejs');
 })
 
+servidor.use(express.static('./public'));
+
 servidor.use('/usuarios', routeUsuarios)
 servidor.use(rutaValidacion)
 servidor.use(costos)
