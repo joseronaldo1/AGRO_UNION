@@ -5,11 +5,11 @@ import rutaValidacion from './src/routes/route.autenticacion.js'
 import costos from './src/routes/costos.routes.js';
 import rutaFinca from './src/routes/Finca.routes.js';
 import rutalote from './src/routes/lotes.routes.js';
+
 import rutaAsignacion from './src/routes/routes.asignacion.js';
 import rutaRecursos from './src/routes/routes.Recursos.js';
 import { rutaDeTipoRecurso } from './src/routes/TipoRecurso.route.js';
-import { rutaDeActividad } from './src/routes/Actividad.route.js';
-import { produccion } from './src/routes/produccion.routes.js';
+
 
 const servidor = express()
 
@@ -32,8 +32,7 @@ servidor.use(rutalote)
 servidor.use(rutaAsignacion)
 servidor.use(rutaRecursos)
 servidor.use(rutaDeTipoRecurso)
-servidor.use(rutaDeActividad)
-servidor.use(produccion)
+
 servidor.listen(3000, () =>{
     console.log("esta funcionando")
 })
