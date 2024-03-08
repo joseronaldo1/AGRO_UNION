@@ -46,33 +46,42 @@ export const Registrarlotes = async (req, res) => {
     }   
 }
 
-export const Actualizarlote = async (req,res) => {
+export const Actualizarlote = async (req, res) => {
     try {
         const errors = validationResult(req);
-        if(!errors.isEmpty()){
-            res.status(400).json({errors})
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() }); // Corrección en el formato de los errores de validación
         }
-        const {id_lote} = req.params
-        const {nombre, longitud, latitud, fk_id_finca, fk_id_produccion, fk_id_variedad, estado} = req.body
-        const [ oldUser ] = await pool.query("select * from lotes where id_lote=?", [id_lote])
-        const [ resultado ] =await pool.query(`update lotes set nombre="${nombre?nombre:oldUser[0].nombre}", longitud="${longitud?longitud:oldUser[0].longitud}", latitud="${latitud?latitud:[0].latitud}", fk_id_finca="${fk_id_finca?fk_id_finca:oldUser[0].fk_id_finca}", fk_id_produccion="${fk_id_produccion?fk_id_produccion:oldUser[0].fk_id_produccion}", fk_id_variedad="${fk_id_variedad?fk_id_variedad:oldUser[0].fk_id_variedad}", fk_id_variedad="${estado?estado:oldUser[0].estado}" where id_lote=${parseInt(id_lote)}`)
-
-        if (resultado.aproductosRows > 0) {
-            res.status(200).json({
-                "mensaje": "ha sido actualizado"
-            })
+        
+        const { id_lote } = req.params;
+        const { nombre, longitud, latitud, fk_id_finca, fk_id_produccion, fk_id_variedad, estado } = req.body;
+        
+        const [oldUser] = await pool.query("SELECT * FROM lotes WHERE id_lote=?", [id_lote]);
+        
+        const updateValues = {
+            nombre: nombre ? nombre : oldUser[0].nombre,
+            longitud: longitud ? longitud : oldUser[0].longitud,
+            latitud: latitud ? latitud : oldUser[0].latitud,
+            fk_id_finca: fk_id_finca ? fk_id_finca : oldUser[0].fk_id_finca,
+            fk_id_produccion: fk_id_produccion ? fk_id_produccion : oldUser[0].fk_id_produccion,
+            fk_id_variedad: fk_id_variedad ? fk_id_variedad : oldUser[0].fk_id_variedad,
+            estado: estado ? estado : oldUser[0].estado
+        };
+        
+        const updateQuery = `UPDATE lotes SET nombre=?, longitud=?, latitud=?, fk_id_finca=?, fk_id_produccion=?, fk_id_variedad=?, estado=? WHERE id_lote=?`;
+        
+        const [resultado] = await pool.query(updateQuery, [updateValues.nombre, updateValues.longitud, updateValues.latitud, updateValues.fk_id_finca, updateValues.fk_id_produccion, updateValues.fk_id_variedad, updateValues.estado, parseInt(id_lote)]);
+        
+        if (resultado.affectedRows > 0) { 
+            res.status(200).json({ "mensaje": "El lote ha sido actualizado" });
         } else {
-            productostus(404).json({
-                "mensaje": "No se pudo actualizar"
-            })
+            res.status(404).json({ "mensaje": "No se pudo actualizar el lote" }); 
         }
-
     } catch (error) {
-        res.status(500).json({
-            "mensaje": error
-        })
-    }   
+        res.status(500).json({ "mensaje": error.message }); // Corrección en el manejo de error
+    }
 }
+
 
 export const Buscarlote = async (req, res) => {
     try {
