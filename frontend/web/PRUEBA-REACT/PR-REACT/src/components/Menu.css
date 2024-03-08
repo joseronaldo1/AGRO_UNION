@@ -1,0 +1,38 @@
+.dropdown-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 180px;
+    height: 95%;
+    background-color: #d8d8d8;
+    z-index: 999;
+    padding: 15px;
+  }
+  
+  .close-icon {
+    margin-left: 170px;
+    font-size: 1.4em;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .dropdown-menu a:hover {
+    background-color: #f2f2f2;
+    border-radius: 20px;
+    color: green;
+  }
+  
+  .iconos {
+    margin-top: 10px;
+  }
+  
+  .cerrarSesion {
+    margin-top: 110px;
+  }
+  
