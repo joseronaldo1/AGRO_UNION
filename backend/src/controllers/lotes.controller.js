@@ -47,12 +47,12 @@ export const Registrarlotes = async (req, res) => {
 }
 
 export const Actualizarlote = async (req,res) => {
-
 /// corrugei Actualizacion  deje registrar solo uno 
 
 // corrige que me esta borrando los datos al actualizar 
 
 // corrige bien la validacion porfa
+
 
 
 

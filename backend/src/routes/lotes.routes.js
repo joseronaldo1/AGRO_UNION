@@ -6,7 +6,6 @@ const rutalote = Router();
 
 rutalote.get("/listarlote", listarlotes);
 rutalote.post("/Registrarlote",validarlotes, Registrarlotes);
-
 //nesecita llamar id 
 rutalote.put("/Actualizarlote",validarlotes, Actualizarlote);
 rutalote.get("/Buscarlote", Buscarlote);
@@ -18,3 +17,4 @@ rutalote.delete("/desactivarlote", Desactivarlote);
 
 
 export default rutalote ;
+
