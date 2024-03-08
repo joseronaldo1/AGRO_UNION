@@ -1,7 +1,7 @@
 import { Router } from "express";
-import {registrar,  actualizar,  buscar, listar } from '../controller/controllerRecursos.js';
-import { validacionRecursosR } from "../../validate/validacionRecursos.js";
-import { validacionRecursosA } from "../../validate/validacionRecursos.js";
+import {registrar,  actualizar,  buscar, listar } from '../controllers/controllerRecursos.js';
+import { validacionRecursosR, validacionRecursosA } from "../../validate/validacionRecursos.js";
+
 
 
 const rutaRecursos = Router();
