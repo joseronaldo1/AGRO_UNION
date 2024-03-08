@@ -42,14 +42,21 @@ export const listar = async (req,res) => {
 
   export const actualizar = async (req, res) => {
     try {
-        const { precio,fk_id_tipo_recursos} = req.body;
-         
-        const [oldUsuario] = await pool.query("SELECT * FROM recursos WHERE id_recursos = ?", [id_recursos]);
+      const {id_recursos} = req.params;
+        const { precio, fk_id_tipo_recursos,  } = req.body;
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+           return res.status(400).json({ errors: errors.array() });
+        }
+        const [oldrecursos] = await pool.query("SELECT * FROM recursos WHERE id_recursos = ?", [id_recursos]);
         const [result] = await pool.query(
-            `UPDATE recursos SET estado = ${precio ? `'${precio}'` : `'${oldUsuario[0].precio}'`,fk_id_tipo_recursos ? `'${fk_id_tipo_recursos}'` : `'${oldUsuario[0].fk_id_tipo_recursos}'`} WHERE id_recursos = ?`,[id_recursos]
+            `UPDATE recursos SET precio = ?, fk_id_tipo_recursos = ? WHERE id_recursos = ?`,
+            [precio ? precio : oldrecursos[0].precio, fk_id_tipo_recursos ? fk_id_tipo_recursos : oldrecursos[0].fk_id_tipo_recursos, id_recursos]
         );
+        console.log(result)
+        console.log(oldrecursos)
 
-        if (result.affectedRows >  0) {
+        if (result.affectedRows > 0) {
             res.status(200).json({  
                 status: 200,
                 mensaje: "El recurso ha sido actualizado." 
@@ -65,9 +72,9 @@ export const listar = async (req,res) => {
             status: 500,
             message: error.message
         });
+        console.log(error);
     }
 };
-
 
   
   export const buscar = async (req, res) => {
