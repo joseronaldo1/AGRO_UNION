@@ -74,11 +74,14 @@ export const registrarUsuarios = async (req, res) => {
 export const actualizarUsuario = async (req, res) => {
     try {
         const { nombres,apellidos,correo,contraseña,rol,estado} = req.body;
-        const [result] = await pool.query(`UPDATE usuarios SET nombres=?, apellidos=?,correo=?, contraseña=?, rol=?, estado=?`, [nombres,apellidos,correo,contraseña,rol,estado]);
          
+        const [oldUsuario] = await pool.query("SELECT * FROM usuarios WHERE id_usuario = ?", [id_usuario]);
+        const [result] = await pool.query(
+            `UPDATE usuarios SET estado = ${nombres ? `'${nombres}'` : `'${oldUsuario[0].nombres}'`,apellidos ? `'${apellidos}'` : `'${oldUsuario[0].apellidos}'`,correo ? `'${correo}'` : `'${oldUsuario[0].correo}'`,contraseña ? `'${contraseña}'` : `'${oldUsuario[0].contraseña}'`,rol ? `'${rol}'` : `'${oldUsuario[0].rol}'`,estado ? `'${estado}'` : `'${oldUsuario[0].estado}'`} WHERE id_usuario = ?`,[id_usuario]
+        );
 
         if (result.affectedRows >  0) {
-            res.status(200).json({ 
+            res.status(200).json({  
                 status: 200,
                 mensaje: "El usuario ha sido actualizado." 
             });
@@ -99,12 +102,15 @@ export const actualizarUsuario = async (req, res) => {
 export const desactivarUsuario = async (req, res) => {
     try {
         const { id_usuario } = req.params;
-        const [result] = await pool.query("UPDATE usuarios SET estado='inactivo' WHERE id_usuario=?", [id_usuario]);
+        const [oldUsuario] = await pool.query("SELECT * FROM actividad WHERE id_usuario = ?", [id_usuario]); 
         
+        const [result] = await pool.query(
+            `UPDATE usuarios SET estado = ${estado ? `'${estado}'` : `'${oldUsuario[0].estado}'`} WHERE id_usuario = ?`,[id_usuario]
+        );        
         if (result.affectedRows >  0) {
             res.status(200).json({
                 status: 200,
-                "mensaje": "El usuario con el id "+id_usuario+" ha sido desactivado."
+                "mensaje": "El usuario con el id "+ id_usuario +" ha sido desactivado."
             });
         } else {
             res.status(404).json({
