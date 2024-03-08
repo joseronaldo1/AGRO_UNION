@@ -49,9 +49,8 @@ export const registrarUsuarios = async (req, res) => {
         if(!errors.isEmpty()){
             return res.status(400).json(errors)
         }
-        
-        const{nombres,apellidos,correo,password,rol,estado} = req.body
-        const[rows] = await pool.query(`INSERT INTO usuarios (nombres,apellidos,correo,password,rol,estado) values (?, ?, ?, ?, ?,?)`, [nombres,apellidos,correo,password,rol,estado])
+        const{nombres,apellidos,correo,contraseña,rol,estado} = req.body
+        const[rows] = await pool.query(`INSERT INTO usuarios (nombres,apellidos,correo,contraseña,rol,estado) values (?, ?, ?, ?, ?,?)`, [nombres,apellidos,correo,contraseña,rol,estado])
 
         if(rows.affectedRows>0){
             res.status(200).json({
@@ -74,8 +73,8 @@ export const registrarUsuarios = async (req, res) => {
 
 export const actualizarUsuario = async (req, res) => {
     try {
-        const { nombres,apellidos,correo,password,rol,estado} = req.body;
-        const [result] = await pool.query(`UPDATE usuarios SET nombres=?, apellidos=?,correo=?, password=?, rol=?, estado=?`, [nombres,apellidos,correo,password,rol,estado]);
+        const { nombres,apellidos,correo,contraseña,rol,estado} = req.body;
+        const [result] = await pool.query(`UPDATE usuarios SET nombres=?, apellidos=?,correo=?, contraseña=?, rol=?, estado=?`, [nombres,apellidos,correo,contraseña,rol,estado]);
          
 
         if (result.affectedRows >  0) {

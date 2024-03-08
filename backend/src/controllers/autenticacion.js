@@ -4,9 +4,8 @@ import  Jwt  from "jsonwebtoken";
 export const validar = async (req, res) => {
 
     try {
-
-        let {nombres,password} = req.body;
-        let sql = `SELECT * from usuarios where nombres='${nombres}' and password='${password}'`;
+        let {nombres,contraseña} = req.body;
+        let sql = `SELECT * from usuarios where nombres='${nombres}' and contraseña='${contraseña}'`;
         const [rows] = await pool.query(sql)
         if (rows.length>0) {
             let token=Jwt.sign({rows},process.env.AUT_SECRET,{expiresIn:process.env.AUT_EXPIRE})

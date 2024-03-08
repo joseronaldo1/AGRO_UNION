@@ -6,9 +6,15 @@ const rutalote = Router();
 
 rutalote.get("/listarlote", listarlotes);
 rutalote.post("/Registrarlote",validarlotes, Registrarlotes);
+//nesecita llamar id 
 rutalote.put("/Actualizarlote",validarlotes, Actualizarlote);
 rutalote.get("/Buscarlote", Buscarlote);
+
+// creo que todos no estamos manejando delet solo put 
+//para que desactiove no estamos eliminando como tal 
+//pero comunicate con los compañeros y base de datos 
 rutalote.delete("/desactivarlote", Desactivarlote);
 
 
-export { rutalote };
+export default rutalote ;
+
