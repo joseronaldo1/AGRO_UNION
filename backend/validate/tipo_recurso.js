@@ -14,6 +14,6 @@ export const validarTra = [
 
         check('nombre_recursos', 'El nombre del recurso debe tener máximo 25 caracteres, y seguir el formato especificado').not().optional().isEmpty().isLength({ max: 25 }).matches(/^[a-zA-Z\s]{3,}[a-zA-Z\s\d]{0,3}$/),
         check('cantidad_medida', 'La cantidad medida debe ser un número decimal').optional().isDecimal(),
-        check('unidades_medidas', 'Las unidades de medida son obligatorias y deben ser "kg","g" o "ml","litro"').optional().isEmpty().isIn(['kg', 'g', 'ml', 'litro'])
+        check('unidades_medidas', 'Las unidades deben ser "kg","g" o "ml","litro"').optional().isIn(['kg', 'g', 'ml', 'litro'])
     ];
     

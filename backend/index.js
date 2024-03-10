@@ -9,6 +9,7 @@ import rutalote from './src/routes/lotes.routes.js';
 import rutaAsignacion from './src/routes/routes.asignacion.js';
 import rutaRecursos from './src/routes/routes.Recursos.js';
 import { rutaDeTipoRecurso } from './src/routes/TipoRecurso.route.js';
+import { rutaDeActividad } from './src/routes/Actividad.route.js';
 
 
 const servidor = express()
@@ -34,6 +35,7 @@ servidor.use(rutalote)
 servidor.use(rutaAsignacion)
 servidor.use(rutaRecursos)
 servidor.use(rutaDeTipoRecurso)
+servidor.use(rutaDeActividad)
 
 servidor.listen(3000, () =>{
     console.log("esta funcionando")
