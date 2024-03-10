@@ -32,27 +32,50 @@ export const registrarCostos = async (req, res) => {
         }
 
         const { fk_id_lotes, fk_id_recursos, egresos } = req.body;
-        const [Registrar] = await pool.query('INSERT INTO costos (fk_id_lotes, fk_id_recursos, egresos) Values(?,?,?)', [fk_id_lotes, fk_id_recursos, egresos]);
+
+        // Verificar si el fk_id_lotes existe
+        const [loteExist] = await pool.query('SELECT * FROM lotes WHERE id_lote = ?', [fk_id_lotes]);
+
+        if (loteExist.length === 0) {
+            return res.status(404).json({
+                status: 404,
+                message: 'El lote no existe. Registre primero un lote.'
+            });
+        }
+
+        // Verificar si el fk_id_recursos existe
+        const [recursoExist] = await pool.query('SELECT * FROM recursos WHERE id_recursos = ?', [fk_id_recursos]);
+
+        if (recursoExist.length === 0) {
+            return res.status(404).json({
+                status: 404,
+                message: 'El recurso no existe. Registre primero un recurso.'
+            });
+        }
+
+
+        const [Registrar] = await pool.query('INSERT INTO costos (fk_id_lotes, fk_id_recursos, egresos) VALUES (?, ?, ?)', [fk_id_lotes, fk_id_recursos, egresos]);
 
         if (Registrar.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'se Registró correctamente'
+                message: 'Se registró correctamente'
             });
         } else {
             res.status(400).json({
                 status: 400,
-                message: 'campo obligatorio'
+                message: 'Campo obligatorio'
             });
         }
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: 'error en el servidor',
+            message: 'Error en el servidor',
             error: error.message
         });
     }
 };
+
 
 export const BuscarCostos = async (req, res) => {
     try {
