@@ -10,8 +10,8 @@ export const registrarAsignacion = async (req, res) => {
             return res.status(400).json(errors);
         }
 
-        const { fecha_inicio, fecha_fin, fk_id_usuario, fk_actividad } = req.body;
-        const [result] = await pool.query("INSERT INTO asignacion (fecha_inicio, fecha_fin, fk_id_usuario, fk_actividad) VALUES (?,?,?,?)", [fecha_inicio, fecha_fin, fk_id_usuario, fk_actividad]);
+        const { fecha_inicio, fecha_fin, fk_id_usuario, fk_actividad, estado } = req.body;
+        const [result] = await pool.query("INSERT INTO asignacion (fecha_inicio, fecha_fin, fk_id_usuario, fk_actividad, estado) VALUES (?,?,?,?,?)", [fecha_inicio, fecha_fin, fk_id_usuario, fk_actividad, estado]);
 
         if (result.affectedRows > 0) {
             res.status(200).json({
@@ -61,11 +61,11 @@ export const actualizarAsignacion = async (req, res) => {
         }
 
         const { id } = req.params;
-        const { fecha_inicio, fecha_fin, fk_id_usuario, fk_actividad } = req.body;
+        const { fecha_inicio, fecha_fin, fk_id_usuario, fk_actividad, estado } = req.body;
         // Primero, obtén el registro existente para saber cuál es el valor actual de fecha_inicio
         const [oldTipoRecurso] = await pool.query("SELECT * FROM asignacion WHERE id_asignacion=?", [id]);
         // Luego, actualiza el registro con los nuevos valores, utilizando parámetros para evitar inyecciones SQL
-        const [result] = await pool.query(`UPDATE asignacion SET fecha_inicio = ?, fecha_fin = ?, fk_id_usuario = ?, fk_actividad = ? WHERE id_asignacion = ?`, [fecha_inicio || oldTipoRecurso[0].fecha_inicio, fecha_fin || oldTipoRecurso[0].fecha_fin, fk_id_usuario || oldTipoRecurso[0].fk_id_usuario, fk_actividad || oldTipoRecurso[0].fk_actividad, id]);
+        const [result] = await pool.query(`UPDATE asignacion SET fecha_inicio = ?, fecha_fin = ?, fk_id_usuario = ?, fk_actividad = ?, estado = ? WHERE id_asignacion = ?`, [fecha_inicio || oldTipoRecurso[0].fecha_inicio, fecha_fin || oldTipoRecurso[0].fecha_fin, fk_id_usuario || oldTipoRecurso[0].fk_id_usuario, fk_actividad || oldTipoRecurso[0].fk_actividad, estado || oldTipoRecurso[0].estado, id]);
         
         if (result.affectedRows > 0) {
             res.status(200).json({
