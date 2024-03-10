@@ -4,18 +4,26 @@ import Menu from './components/Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
+
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   return (
-  
-    <BrowserRouter>
-    <Routes>
-      <Route path='/login/' element={<Login/>}/>
-      <Route path='registro' element={<Regsitro/>}/>
-    </Routes>
-    </BrowserRouter>
+    <div>
+      <Header toggleMenu={toggleMenu} />
+      <Menu isOpen={menuOpen} toggleMenu={toggleMenu} />
+      <div className="config">
+        <h1>
+          AYUDA Y CONFIGURACIÓN
+          <FontAwesomeIcon icon={faCog} />
+        </h1>
+      </div>
+      <p>¿En que te ayudo?</p>
+    </div>
   );
 }
 
