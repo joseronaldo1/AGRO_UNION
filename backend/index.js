@@ -1,13 +1,13 @@
 import express  from 'express' 
 import  body_parser from 'body-parser'
-import routeUsuarios from './src/routes/routes.usuarios.js'
+ import routeUsuarios from './src/routes/routes.usuarios.js'
 import rutaValidacion from './src/routes/route.autenticacion.js'
 import costos from './src/routes/costos.routes.js';
 import rutaFinca from './src/routes/Finca.routes.js';
 import rutalote from './src/routes/lotes.routes.js';
 
 import rutaAsignacion from './src/routes/routes.asignacion.js';
-import rutaRecursos from './src/routes/routes.Recursos.js';
+import rutaRecursos from './src/routes/routes.Recursos.js'; 
 import { rutaDeTipoRecurso } from './src/routes/TipoRecurso.route.js';
 import { rutaDeActividad } from './src/routes/Actividad.route.js';
 
@@ -33,7 +33,7 @@ servidor.use(costos)
 servidor.use(rutaFinca)
 servidor.use(rutalote)
 servidor.use(rutaAsignacion)
-servidor.use(rutaRecursos)
+servidor.use(rutaRecursos) 
 servidor.use(rutaDeTipoRecurso)
 servidor.use(rutaDeActividad)
 

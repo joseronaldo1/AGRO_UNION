@@ -32,6 +32,24 @@ export const RegistrarA = async (req, res) => {
         // Si no se proporciona un valor para 'rol', establecerlo como 'activo'
         const esta = estado || 'activo';
 
+         // fk variedad 
+         const [variedadExist] = await pool.query('SELECT * FROM variedad WHERE id_variedad = ?', [fk_id_variedad]);
+
+         if (variedadExist.length === 0) {
+             return res.status(404).json({
+                 status: 404,
+                 message: 'la variedad no existe. Registre primero una variedad.'
+             });
+         }
+         // fk recursos
+         const [recurExist] = await pool.query('SELECT * FROM recursos WHERE id_recursos = ?', [fk_id_recursos]);
+
+         if (recurExist.length === 0) {
+             return res.status(404).json({
+                 status: 404,
+                 message: 'el recurso no existe. Registre primero un recurso.'
+             });
+         }
         
         const [result] = await pool.query("INSERT INTO actividad (actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, fk_id_recursos, estado) VALUES (?, ?, ?, ?, ?, ?, ?)", [actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, fk_id_recursos, esta]);
 
