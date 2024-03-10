@@ -6,7 +6,7 @@ const costos = Router()
 
 costos.get('/listarCosto',listarCostos)
 costos.post('/RegistrarCosto',ValidateCostos, registrarCostos)
-costos.get('/BuscarCosto',BuscarCostos)
+costos.get('/BuscarCosto/:id_costos',BuscarCostos)
 costos.put('/ActualizarCosto/:id_costos',actualizar, actualizarCostos)
 
 

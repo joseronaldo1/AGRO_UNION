@@ -56,7 +56,7 @@ export const registrarCostos = async (req, res) => {
 
 export const BuscarCostos = async (req, res) => {
     try {
-        const { id_costos } = req.body;
+        const { id_costos } = req.params;
         const consultar = 'SELECT * FROM costos WHERE id_costos LIKE ?';
         const [resultado] = await pool.query(consultar, [`%${id_costos}%`]);
 

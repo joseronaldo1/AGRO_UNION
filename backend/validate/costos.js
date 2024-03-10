@@ -2,8 +2,8 @@ import { check } from "express-validator";
 
 
 export const ValidateCostos=[
-    check('fk_id_lotes','campos obligatorios').not().isEmpty().isInt().isNumeric(),
-    check('fk_id_recursos','campos obligatorios').not().isEmpty().isInt().isNumeric(),
+    check('fk_id_lotes','campos obligatorios y solo recibe numeros').not().isEmpty().isInt().isNumeric(),
+    check('fk_id_recursos','campos obligatorios ys solo recibe numeros').not().isEmpty().isInt().isNumeric(),
     check('egresos','campos obligatorios').not().isEmpty().isFloat()
 
 ]
