@@ -26,7 +26,7 @@ servidor.get('/document',(req,res)=>{
 
 servidor.use(express.static('./public'));
 
-servidor.use('/usuarios', routeUsuarios)
+servidor.use(routeUsuarios)
 servidor.use(rutaValidacion)
 servidor.use(costos)
 servidor.use(rutaFinca)

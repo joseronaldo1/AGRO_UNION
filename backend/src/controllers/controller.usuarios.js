@@ -49,13 +49,13 @@ export const registrarUsuarios = async (req, res) => {
         if(!errors.isEmpty()){
             return res.status(400).json(errors)
         }
-        const{nombres,apellidos,correo,contrasena,rol,estado} = req.body
-        const[rows] = await pool.query(`INSERT INTO usuarios (nombres,apellidos,correo,contrasena,rol,estado) values (?, ?, ?, ?, ?,?)`, [nombres,apellidos,correo,contrasena,rol,estado])
+        const{nombre,apellido,correo,password,rol,estado} = req.body
+        const[rows] = await pool.query(`INSERT INTO usuarios (nombre,apellido,correo,password,rol,estado) values (?, ?, ?, ?, ?,?)`, [nombre,apellido,correo,password,rol,estado])
 
 
         if(rows.affectedRows>0){
             res.status(200).json({
-                'status': 'Se registro con exito el usuario'+nombres
+                'status': 'Se registro con exito el usuario'+ nombre
             })
         }else{
             res.status(403).json({
@@ -79,7 +79,7 @@ export const actualizarUsuario = async (req, res) => {
         }
 
         const { id_usuario } = req.params;
-        const { nombres, apellidos, correo, contrasena, rol, estado } = req.body;
+        const { nombre, apellido, correo, password, rol, estado } = req.body;
 
         const [oldUsuario] = await pool.query("SELECT * FROM usuarios WHERE id_usuario = ?", [id_usuario]);
 
@@ -91,17 +91,17 @@ export const actualizarUsuario = async (req, res) => {
         }
 
         const updatedUsuario = {
-            nombres: nombres || oldUsuario[0].nombres,
-            apellidos: apellidos || oldUsuario[0].apellidos,
+            nombre: nombre || oldUsuario[0].nombre,
+            apellido: apellido || oldUsuario[0].apellido,
             correo: correo || oldUsuario[0].correo,
-            contrasena: contrasena || oldUsuario[0].contrasena,
+            password: password || oldUsuario[0].password,
             rol: rol || oldUsuario[0].rol,
             estado: estado || oldUsuario[0].estado,
         };
 
         const [result] = await pool.query(
-            `UPDATE usuarios SET nombres=?, apellidos=?, correo=?, contrasena=?, rol=?, estado=? WHERE id_usuario = ?`,
-            [updatedUsuario.nombres, updatedUsuario.apellidos, updatedUsuario.correo, updatedUsuario.contrasena, updatedUsuario.rol, updatedUsuario.estado, id_usuario]
+            `UPDATE usuarios SET nombre=?, apellido=?, correo=?, password=?, rol=?, estado=? WHERE id_usuario = ?`,
+            [updatedUsuario.nombre, updatedUsuario.apellido, updatedUsuario.correo, updatedUsuario.password, updatedUsuario.rol, updatedUsuario.estado, id_usuario]
         );
 
         if (result.affectedRows > 0) {

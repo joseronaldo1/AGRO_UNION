@@ -4,13 +4,13 @@ import  Jwt  from "jsonwebtoken";
 export const validar = async (req, res) => {
 
     try {
-        let {nombres,contrasena} = req.body;
-        let sql = `SELECT * from usuarios where nombres='${nombres}' and contrasena='${contrasena}'`;
+        let {nombre,password} = req.body;
+        let sql = `SELECT * from usuarios where nombre='${nombre}' and password='${password}'`;
 
         const [rows] = await pool.query(sql)
         if (rows.length>0) {
             let token=Jwt.sign({rows},process.env.AUT_SECRET,{expiresIn:process.env.AUT_EXPIRE})
-            return res.status(200).json({'nombres':rows, 'token':token,message:'token generado con exito'})
+            return res.status(200).json({'nombre':rows, 'token':token,message:'token generado con exito'})
         }else{
             return res.status(404).json({"message":"Usuario no autorizado"})
         }
