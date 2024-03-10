@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { registrarVariedad, listarVariedades, actualizarVariedad, desactivarVariedad, buscarVariedad } from "../controllers/variedad.controller.js";
 import { validarRegistroVariedad, validarActualizacionVariedad } from "../../validate/validarVariedad.js";
-import {validarToken} from "../controllers/autenticacion.js"
+
+import {validarToken} from "../controllers/autenticacion.js";
 
 const rutaDeVariedad = Router();
 
