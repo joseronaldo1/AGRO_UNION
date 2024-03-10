@@ -11,3 +11,4 @@ costos.put('/ActualizarCosto/:id_costos',actualizar, actualizarCostos)
 
 
 export default costos
+

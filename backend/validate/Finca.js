@@ -6,7 +6,6 @@ export const validarFincaR = [
         .not().isEmpty().isLength({ max: 100 }).matches(/^[a-zA-Z\s]+$/),
     check('longitud', 'La longitud debe ser un número válido entre -180 y 180')
         .isFloat({ min: -180, max: 180 }),
-
     check('latitud', 'La latitud debe ser un número válido entre -90 y 90')
         .isFloat({ min: -90, max: 90 })
 ];

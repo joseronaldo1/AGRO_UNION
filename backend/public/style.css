@@ -1,8 +1,31 @@
-table, tr, td{
-    border: solid 1px black;
+table {
     border-collapse: collapse;
-}
-
-table{
-    width: 1000px;
-}
+    width: 1000px; /* Ajusta el ancho de la tabla al 100% del contenedor */
+    font-family: Arial, sans-serif; /* Establece una fuente predeterminada */
+  }
+  
+  th, td {
+    border: 1px solid #dddddd; /* Define un borde para las celdas */
+    text-align: left; /* Alinea el texto a la izquierda */
+    padding: 8px; /* Agrega padding para mejorar la legibilidad */
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2; /* Colores de fondo para filas pares */
+  }
+  th {
+    background-color: #4CAF50; /* Color de fondo para las celdas de encabezado */
+    color: white; /* Texto en blanco para mejorar la legibilidad */
+  }
+  .table-api {
+    width: 70%; /* Ajusta el ancho de la tabla */
+    margin: 0 auto; /* Centra la tabla */
+  }
+  
+  .table-api tr:nth-child(even) {
+    background-color: #f2f2f2; /* Colores de fondo para filas pares */
+  }
+  
+  .table-api th {
+    background-color: #4CAF50; /* Color de fondo para las celdas de encabezado */
+    color: white; /* Texto en blanco para mejorar la legibilidad */
+  }

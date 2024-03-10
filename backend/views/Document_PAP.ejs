@@ -8,10 +8,9 @@
     <link rel="stylesheet" href="/public/style.css">
 </head>
 <body>
+    <h1>Documentación de la Api Produccion</h1>
 
-    <h1>Documentación de la API</h1>
-
-    <h2>Listar Producción</h2>
+    <h3>Listar Producción</h3>
 
     <table>
         <tr>
@@ -41,56 +40,24 @@
         <tr>
             <td>Respuesta JSON</td>
             <td>
-                <p>Correcto:</p>
-                <p>Status: 200</p>
-                <p>JSON:</p>
-                <pre>
-{
-    "status": 200,
-    "json": [
-    {
-        "id_produccion": 1,
-        "cantidad_produccion": 1500,
-        "precio": 2.5,
-        "fk_variedad_cultivo": 1
-      },
-      {
-        "id_produccion": 2,
-        "cantidad_produccion": 800,
-        "precio": 3.0,
-        "fk_variedad_cultivo": 2
-      },
-    ]
-}
-                </pre>
+                Correcto:
+                Status: 200
+                JSON:
+                {"status": 200,"json": [{"id_produccion": 1,"cantidad_produccion": 1500,"precio": 2.5,"fk_variedad_cultivo": 1},{"id_produccion": 2,"cantidad_produccion": 800,"precio": 3.0,"fk_variedad_cultivo": 2},]}
                 <br>
-                <p>Incorrecto:</p>
-                <p>Status: 400</p>
-                <p>JSON:</p>
-                <pre>
-{
-    "status": 400,
-    "message": "No hay ningún registro de producción."
-}
-                </pre>
+                Incorrecto:
+                Status: 400
+                JSON:
+                {"status": 400,"message": "No hay ningún registro de producción."}
                 <br>
-                <p>Error en el servidor:</p>
-                <p>Status: 500</p>
-                <p>JSON:</p>
-                <pre>
-{
-    "status": 500,
-    "message": "Error en el servidor."
-}
-                </pre>
+                Error en el servidor:
+                Status: 500
+                JSON:
+                {"status": 500,"message": "Error en el servidor."}
             </td>
         </tr>
     </table>
 
-    <br>
-    <br>
-    <br>
-    <br>
     <h3>Requerimiento 2. Documentación ENDPOINT Registrar Producción</h3>
 
     <table>
@@ -120,58 +87,29 @@
         </tr>
         <tr>
             <td>Request JSON</td>
-            <td>
-                <pre>
-{
-    
-   "id_produccion": 3,
-   "cantidad_produccion": 1600,
-   "precio": 2.5,
-   "fk_variedad_cultivo": 8
-}
-                </pre>
-            </td>
+            <td>{"id_produccion": 3,"cantidad_produccion": 1600,"precio": 2.5,"fk_variedad_cultivo": 8}</td>
         </tr>
         <tr>
             <td>Respuesta JSON</td>
             <td>
-                <p>Correcto:</p>
-                <p>Status: 200</p>
-                <p>JSON:</p>
-                <pre>
-{
-    "status": 200,
-    "message": "Se registró la producción correctamente"
-}
-                </pre>
+                Correcto:
+                Status: 200
+                JSON:
+                {"status": 200,"message": "Se registró la producción correctamente"}
                 <br>
-                <p>Incorrecto:</p>
-                <p>Status: 400</p>
-                <p>JSON:</p>
-                <pre>
-{
-    "status": 400,
-    "message": "Faltan campos requeridos en la solicitud"
-}
-                </pre>
+                Incorrecto:
+                Status: 400
+                JSON:
+                {"status": 400,"message": "Faltan campos requeridos en la solicitud"}
                 <br>
-                <p>Error en el servidor:</p>
-                <p>Status: 500</p>
-                <p>JSON:</p>
-                <pre>
-{
-    "status": 500,
-    "message": "Error en el servidor"
-}
-                </pre>
+                Error en el servidor:
+                Status: 500
+                JSON:
+                {"status": 500,"message": "Error en el servidor"}
             </td>
         </tr>
     </table>
 
-    <br>
-    <br>
-    <br>
-    <br>
     <h3>Requerimiento 3: Buscar Producción por Variedad de Cultivo</h3>
 
     <table>
@@ -201,57 +139,30 @@
         </tr>
         <tr>
             <td>Request JSON</td>
-            <td>
-                <pre>
-{
-    "fk_variedad_cultivo": "Tipo de Variedad"
-}
-                </pre>
-            </td>
+            <td>{"fk_variedad_cultivo": "Tipo de Variedad"}</td>
         </tr>
         <tr>
             <td>Respuesta JSON</td>
             <td>
-                <p>Éxito:</p>
-                <p>Status: 200</p>
-                <p>JSON:</p>
-                <pre>
-{
-    "status": 200,
-    "data": [
-        // Lista de registros de producción que coinciden con la variedad de cultivo
-    ]
-}
-                </pre>
+                Éxito:
+                Status: 200
+                JSON:
+                {"status": 200,"data": ["id_produccion": 3,"cantidad_produccion": 1600,"precio": 2.5,"fk_variedad_cultivo": 8]}
                 <br>
-                <p>Sin Resultados:</p>
-                <p>Status: 404</p>
-                <p>JSON:</p>
-                <pre>
-{
-    "status": 404,
-    "message": "No se encontraron resultados para la variedad de cultivo proporcionada"
-}
-                </pre>
+                Sin Resultados:
+                Status: 404
+                JSON:
+                {"status": 404,"message": "No se encontraron resultados para la variedad de cultivo proporcionada"}
                 <br>
-                <p>Error en el Servidor:</p>
-                <p>Status: 500</p>
-                <p>JSON:</p>
-                <pre>
-{
-    "status": 500,
-    "message": "Error en el servidor"
-}
-                </pre>
+                Error en el Servidor:
+                Status: 500
+                JSON:
+                {"status": 500,"message": "Error en el servidor"}
             </td>
         </tr>
     </table>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <h2>Actualizar Producción</h2>
+    <h3>Actualizar Producción</h3>
 
     <table>
         <tr>
@@ -280,58 +191,29 @@
         </tr>
         <tr>
             <td>Parámetros de Ruta</td>
-            <td>
-                <pre>
-{
-    "id_produccion": "ID de la producción a actualizar"
-}
-                </pre>
-            </td>
+            <td>{"id_produccion": "ID de la producción a actualizar"}</td>
         </tr>
         <tr>
             <td>Request JSON</td>
-            <td>
-                <pre>
-{
-    "cantidad_produccion": 150,
-    "precio": 15.75,
-    "fk_variedad_cultivo": "Nueva Variedad"
-}
-                </pre>
-            </td>
+            <td>{ "cantidad_produccion": 150, "precio": 15.75, "fk_variedad_cultivo": "Nueva Variedad"}</td>
         </tr>
         <tr>
             <td>Respuesta JSON</td>
             <td>
-                <p>Correcto:</p>
-                <p>Status: 200</p>
-                <p>JSON:</p>
-                <pre>
-{
-    "status": 200,
-    "message": "Se actualizó la producción con éxito"
-}
-                </pre>
+                Correcto:
+                Status: 200
+                JSON:
+                {"status": 200,"message": "Se actualizó la producción con éxito"}
                 <br>
-                <p>Incorrecto:</p>
-                <p>Status: 400</p>
-                <p>JSON:</p>
-                <pre>
-{
-    "status": 400,
-    "message": "No se pudo actualizar la producción. [Mensaje de error específico]"
-}
-                </pre>
+                Incorrecto:
+                Status: 400
+                JSON:
+                {"status": 400,"message": "No se pudo actualizar la producción. [Mensaje de error específico]"}
                 <br>
-                <p>Error en el servidor:</p>
-                <p>Status: 500</p>
-                <p>JSON:</p>
-                <pre>
-{
-    "status": 500,
-    "message": "Error en el servidor"
-}
-                </pre>
+                Error en el servidor:
+                Status: 500
+                JSON:
+                {"status": 500,"message": "Error en el servidor"}
             </td>
         </tr>
     </table>

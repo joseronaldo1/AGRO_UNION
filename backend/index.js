@@ -21,8 +21,10 @@ servidor.set('view engine', 'ejs');
 servidor.set('views','./views');
 
 servidor.get('/document',(req,res)=>{
-    res.render('document.ejs');
+    res.render('documentdevjrl.ejs');
 })
+
+servidor.use(express.static('./public'));
 
 servidor.use('/usuarios', routeUsuarios)
 servidor.use(rutaValidacion)

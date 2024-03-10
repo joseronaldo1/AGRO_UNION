@@ -49,9 +49,9 @@ export const registrarUsuarios = async (req, res) => {
         if(!errors.isEmpty()){
             return res.status(400).json(errors)
         }
-        
         const{nombres,apellidos,correo,contrasena,rol,estado} = req.body
         const[rows] = await pool.query(`INSERT INTO usuarios (nombres,apellidos,correo,contrasena,rol,estado) values (?, ?, ?, ?, ?,?)`, [nombres,apellidos,correo,contrasena,rol,estado])
+
 
         if(rows.affectedRows>0){
             res.status(200).json({
@@ -126,15 +126,12 @@ export const actualizarUsuario = async (req, res) => {
 export const desactivarUsuario = async (req, res) => {
     try {
         const { id_usuario } = req.params;
-        const [oldUsuario] = await pool.query("SELECT * FROM actividad WHERE id_usuario = ?", [id_usuario]); 
+        const [result] = await pool.query("UPDATE usuarios SET estado='inactivo' WHERE id_usuario=?", [id_usuario]);
         
-        const [result] = await pool.query(
-            `UPDATE usuarios SET estado = ${estado ? `'${estado}'` : `'${oldUsuario[0].estado}'`} WHERE id_usuario = ?`,[id_usuario]
-        );        
         if (result.affectedRows >  0) {
             res.status(200).json({
                 status: 200,
-                "mensaje": "El usuario con el id "+ id_usuario +" ha sido desactivado."
+                "mensaje": "El usuario con el id "+id_usuario+" ha sido desactivado."
             });
         } else {
             res.status(404).json({
