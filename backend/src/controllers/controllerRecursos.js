@@ -23,6 +23,16 @@ export const listar = async (req,res) => {
          return res.status(400).json({ errors: errors.array() });
       }
     const {fk_id_tipo_recursos, precio} = req.body;
+
+    // Verificar si el fk_id_lotes existe
+    const [recursosExist] = await pool.query('SELECT * FROM recursos WHERE id_recursos = ?', [fk_id_tipo_recursos]);
+
+    if (recursosExist.length === 0) {
+        return res.status(404).json({
+            status: 404,
+            message: 'El recurso no existe. Registre primero un recurso.'
+        });
+        }
   
     let sql =  `INSERT INTO recursos (fk_id_tipo_recursos, precio) VALUES (?, ?)`;
   
@@ -48,11 +58,21 @@ export const listar = async (req,res) => {
         if (!errors.isEmpty()) {
            return res.status(400).json({ errors: errors.array() });
         }
+            // Verificar si el fk_id_lotes existe
+    const [recursosExist] = await pool.query('SELECT * FROM recursos WHERE id_recursos = ?', [fk_id_tipo_recursos]);
+
+    if (recursosExist.length === 0) {
+        return res.status(404).json({
+            status: 404,
+            message: 'El recurso no existe. Registre primero un recurso.'
+        });
+        }
         const [oldrecursos] = await pool.query("SELECT * FROM recursos WHERE id_recursos = ?", [id_recursos]);
         const [result] = await pool.query(
             `UPDATE recursos SET precio = ?, fk_id_tipo_recursos = ? WHERE id_recursos = ?`,
             [precio ? precio : oldrecursos[0].precio, fk_id_tipo_recursos ? fk_id_tipo_recursos : oldrecursos[0].fk_id_tipo_recursos, id_recursos]
         );
+        
         console.log(result)
         console.log(oldrecursos)
 

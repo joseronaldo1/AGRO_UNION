@@ -16,7 +16,7 @@
   <tr><td>URI</td>  <td>/recursos/listar</td></tr>
   <tr><td>Descripcion</td>  <td>Permite listar los recursos registrados en la base de datos</td></tr>
   <tr><td>Verbo HTTP</td>  <td>Verbo Get</td></tr>
-  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Header:</td>  <td>token:token </td></tr>
   <tr><td>Request json</td>  <td> </td></tr>
   <tr><td>Respuesta json</td>  <td>	
     Correcto: 
@@ -53,7 +53,7 @@ json: {
   <tr><td>URI</td>  <td>/recursos/registrar</td></tr>
   <tr><td>Descripcion</td>  <td>Permite registrar recursos en la base de datos</td></tr>
   <tr><td>Verbo HTTP</td>  <td>Verbo POST</td></tr>
-  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Header:</td>  <td>token:token </td></tr>
   <tr><td>Request json</td> <td>{
     "fk_id_tipo_recursos": 14,
     "precio": 250.000
@@ -92,7 +92,7 @@ json: {
   <tr><td>URI</td>  <td>/recursos/actualizar</td></tr>
   <tr><td>Descripcion</td>  <td>Permite actualizar recursos en la base de datos</td></tr>
   <tr><td>Verbo HTTP</td>  <td>Verbo PUT</td></tr>
-  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Header:</td>  <td>token:token </td></tr>
   <tr><td>Request json</td>  <td>{
     "fk_id_tipo_recursos": 14,
     "precio": 250.000
@@ -131,7 +131,7 @@ json: {
   <tr><td>URI</td>  <td>/fincas/buscar</td></tr>
   <tr><td>Descripcion</td>  <td>Permite buscar los recursos registrados en la base de datos</td></tr>
   <tr><td>Verbo HTTP</td>  <td>Verbo Get</td></tr>
-  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Header:</td>  <td>token:token </td></tr>
   <tr><td>Request json</td>  <td></td></tr>
   <tr><td>Respuesta json</td>  <td>	
     Correcto: 
@@ -162,3 +162,5 @@ json: {
 </table>
 </body>
 </html>
+
+

@@ -8,6 +8,5 @@ export const validacionRecursosR = [
 
 export const validacionRecursosA = [
     check('precio').optional().isNumeric().withMessage('El precio debe ser un número'),
-    check('fk_id_tipo_recursos').optional().isNumeric().withMessage('La fk debe ser un número'),
-    
+    check('fk_id_tipo_recursos').optional().isNumeric().withMessage('La fk debe ser un número')
 ];
