@@ -22,3 +22,4 @@ export const validarlotesactualizar=[
     check('fk_id_variedad','es obligartorio el fk_variedad').isEmpty() .optional(),
     check('estado','es obligartorio el estado').isEmpty() .optional(),
     ]
+    
