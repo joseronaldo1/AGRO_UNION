@@ -35,19 +35,19 @@ export const RegistroTipoRecurso = async (req, res) => {
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se registró el recurso con éxito',
+                message: 'Se registró el recurso con éxito.',
                 result: result
             });
         } else {
             res.status(403).json({
                 status: 403,
-                message: 'No se registró el recurso',
+                message: 'No se registró el recurso.',
             });
         }
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: error.message || 'error en el sistema'
+            message: error.message || 'error en el sistema.'
         });
     }
 }

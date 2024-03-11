@@ -1,7 +1,6 @@
 import { pool } from "../database/conexion.js";
 import { validationResult } from 'express-validator';
 
-//chapata chapata
 //crud listar
 export const listarA = async (req, res) => {
     try {
