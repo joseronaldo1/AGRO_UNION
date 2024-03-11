@@ -36,7 +36,6 @@ servidor.use(rutaRecursos)
 servidor.use(rutaDeTipoRecurso)
 servidor.use(rutaDeActividad)
 
-
 servidor.listen(3000, () =>{
     console.log("esta funcionando")
 })
