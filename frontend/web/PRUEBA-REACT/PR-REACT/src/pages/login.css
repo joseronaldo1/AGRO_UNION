@@ -1,0 +1,128 @@
+.login-container {
+    margin-top: 20px;
+    border: 2px solid #28a745;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    /* Ajusta el espacio entre los elementos */
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.login-form input {
+    margin-bottom: 20px;
+    /* Aumenta el espacio entre los campos de entrada */
+    padding: 12px;
+    /* Aumenta el relleno */
+    font-size: 23px;
+    /* Aumenta el tamaño de fuente */
+}
+
+.forgot-password {
+    margin-top: 15px;
+    /* Aumenta el margen superior */
+    font-size: 1.2em;
+    /* Aumenta el tamaño de fuente */
+    cursor: pointer;
+}
+
+.boton {
+    padding: 8px 16px;
+    background-color: #3f9b23;
+    /* Color de fondo del botón */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3em;
+}
+
+.boton:hover {
+    background-color: #92e292;
+    /* Cambia el color de fondo al pasar el ratón por encima */
+}
+
+.formulario-container {
+    flex: 1;
+    margin-right: 20px;
+    margin-top: 30px;
+    /* Ajusta el margen derecho para separar del borde */
+}
+
+.imagen-wrapper {
+    border-radius: 10px;
+    /* Aplica bordes redondeados */
+    overflow: hidden;
+    /* Evita que la imagen se desborde del contenedor */
+}
+
+.imagen-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagen {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+
+.imagen-texto {
+    text-align: center;
+    margin-top: -170px;
+    font-size: 1.5em;
+    font-weight: bolder;
+}
+
+.Titulo {
+    margin-top: 30px;
+    font-size: 1.8em;
+}
+
+.password-container {
+    position: relative;
+    margin-bottom: 20px;
+    /* Ajusta el margen inferior para separar del siguiente campo */
+}
+
+.password-container input {
+    padding-right: 40px;
+    /* Ajusta el padding derecho para dejar espacio al botón */
+}
+
+.toggle-password-button {
+    position: absolute;
+    top: 40%;
+    right: 10px;
+    /* Ajusta la posición del botón a la derecha del campo de contraseña */
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    margin-bottom: 20px;
+    padding: 12px;
+    font-size: 23px;
+    /* Tamaño del texto */
+}
+
+.user-icon {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    /* Agrega un margen inferior para separar del título */
+    color: #000000;
+    /* Color del icono de usuario */
+    font-size: 130px;
+}
