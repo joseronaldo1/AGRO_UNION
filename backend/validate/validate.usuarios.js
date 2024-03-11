@@ -48,3 +48,4 @@ export const validarUsuario = [
             .isIn(["activo", "inactivo"]),
     ];
     
+    

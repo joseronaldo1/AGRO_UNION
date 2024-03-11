@@ -146,3 +146,4 @@ export const desactivarUsuario = async (req, res) => {
         });
     }
 }
+
