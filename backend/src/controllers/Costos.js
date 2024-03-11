@@ -109,6 +109,26 @@ export const actualizarCostos = async (req, res) => {
         const { id_costos } = req.params;
         const { fk_id_lotes, fk_id_recursos, egresos } = req.body;
 
+        // Verificar si el fk_id_lotes existe
+        const [loteExist] = await pool.query('SELECT * FROM lotes WHERE id_lote = ?', [fk_id_lotes]);
+
+        if (loteExist.length === 0) {
+            return res.status(404).json({
+                status: 404,
+                message: 'El lote no existe. Registre primero un lote.'
+            });
+        }
+
+        // Verificar si el fk_id_recursos existe
+        const [recursoExist] = await pool.query('SELECT * FROM recursos WHERE id_recursos = ?', [fk_id_recursos]);
+
+        if (recursoExist.length === 0) {
+            return res.status(404).json({
+                status: 404,
+                message: 'El recurso no existe. Registre primero un recurso.'
+            });
+        }
+
         if (!fk_id_lotes && !fk_id_recursos && !egresos) {
             return res.status(400).json({
                 message: 'se requiere uno de los campos para actualizar'
