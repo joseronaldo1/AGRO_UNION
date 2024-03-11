@@ -20,3 +20,4 @@ export const validarActualizacionVariedad = [
     check('tipo_cultivo', 'El tipo de cultivo debe ser uno de los siguientes valores: alimentarios, textiles, oleaginosos, ornamentales, industriales')
     .optional().isIn(['alimentarios', 'textiles', 'oleaginosos', 'ornamentales', 'industriales']).withMessage('El tipo de cultivo no es válido')
 ];
+

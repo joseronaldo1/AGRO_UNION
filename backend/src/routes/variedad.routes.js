@@ -13,3 +13,4 @@ rutaDeVariedad.put("/actualizarVariedad/:id",validarToken, validarActualizacionV
 rutaDeVariedad.get("/buscarVariedad/:id",validarToken, buscarVariedad);
 
 export default rutaDeVariedad;
+
