@@ -12,3 +12,4 @@ router.put("/actualizarFinca/:id", ValidarToken, validarFincaA, ActualizarFinca)
 router.get("/buscarFinca/:id", ValidarToken, BuscarFinca);
 
 export default router;
+

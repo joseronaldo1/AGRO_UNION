@@ -24,3 +24,4 @@ export const validarFincaA = [
         .isFloat({ min: -90, max: 90 })
 ];
 
+
