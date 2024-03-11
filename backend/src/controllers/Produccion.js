@@ -34,6 +34,14 @@ export const registrarProduccion = async (req, res) => {
 
         const { cantidad_produccion, precio, fk_variedad_cultivo } = req.body;
 
+        const[variedadExiste]= await pool.query('SELECT * FROM variedad WHERE id_varidad = ?'[fk_variedad_cultivo])
+        if(variedadExiste.length===0){
+            return res.status(404).json({
+                status:404,
+                message:'este id no existe porfabor registrar variedad'
+            })
+        }
+
         if (!cantidad_produccion || !precio || !fk_variedad_cultivo) {
             return res.status(400).json({
                 message: 'se requieren los campos'
@@ -65,9 +73,9 @@ export const registrarProduccion = async (req, res) => {
 
 export const BuscarProduccion = async (req, res) => {
     try {
-        const { fk_variedad_cultivo } = req.body;
-        const consultar = 'SELECT * FROM produccion WHERE fk_variedad_cultivo LIKE ?';
-        const [resultado] = await pool.query(consultar, [`%${fk_variedad_cultivo}%`]);
+        const { id } = req.params;
+        const consultar = 'SELECT * FROM produccion WHERE id_produccion LIKE ?';
+        const [resultado] = await pool.query(consultar, [`%${id}%`]);
 
         if (resultado.length > 0) {
             return res.status(200).json({ resultado });

@@ -35,6 +35,7 @@ servidor.use(rutaAsignacion)
 servidor.use(rutaRecursos)
 servidor.use(rutaDeTipoRecurso)
 
+
 servidor.listen(3000, () =>{
     console.log("esta funcionando")
 })
