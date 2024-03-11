@@ -17,7 +17,7 @@
         <tr><td>Descripción</td>  <td>Permite registrar un nuevo costo en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
         <tr><td>Usuarios</td><td>Administrador</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
+        <tr><td>Header</td>  <td>token:token</td></tr>
         <tr><td>Request json</td>  <td>{
             "fk_id_lotes": 1,
             "fk_id_recursos": 1,
@@ -68,7 +68,7 @@
         <tr><td>Descripción</td>  <td>Permite actualizar un costo existente en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
         <tr><td>Usuarios</td><td>Administrador</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
+        <tr><td>Header</td>  <td>token:token</td></tr>
         <tr><td>Request json</td>  <td>{
             "fk_id_lotes": 1,
             "fk_id_recursos": 1,
@@ -110,7 +110,7 @@
         <tr><td>Descripción</td>  <td>Permite buscar un costo por su id en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
         <tr><td>Usuarios</td><td>Administrador</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
+        <tr><td>Header</td>  <td>token:token</td></tr>
         <tr><td>Request json</td>  <td>{
             "id_costos":1
         }</td></tr>
@@ -155,7 +155,7 @@
         <tr><td>Descripción</td>  <td>Permite obtener una lista de todos los costos registradas en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
         <tr><td>Usuarios</td><td>Administrador</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
+        <tr><td>Header</td>  <td>token:token</td></tr>
         <tr><td>Request json</td>  <td>Null</td></tr>
         <tr><td>Respuesta json</td>  <td>   
         Correcto: 
