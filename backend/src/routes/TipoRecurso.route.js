@@ -5,6 +5,7 @@ import { validarTra } from "../../validate/tipo_recurso.js";
 import { validarTrr } from "../../validate/tipo_recurso.js";
 
 import { validarToken } from "../controllers/autenticacion.js";
+
 const rutaDeTipoRecurso = Router()
 
 //localhost:4000/VariedadCultivo
@@ -16,4 +17,3 @@ rutaDeTipoRecurso.get("/buscarRecurso/:id", validarToken, BuscarTipoRecurso);
 
 export { rutaDeTipoRecurso };
 
-/////
