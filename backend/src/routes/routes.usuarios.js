@@ -8,7 +8,7 @@ const rutaUsuario = Router();
 
 rutaUsuario.get('/listarUsuario', validarToken,listarUsuarios);  
 rutaUsuario.post('/registrarUsuario',validarUsuario,registrarUsuarios);
-rutaUsuario.post('/desactivarUsuario/:id_usuario',validarToken, desactivarUsuario);
+rutaUsuario.put('/desactivarUsuario/:id_usuario',validarToken, desactivarUsuario);
 rutaUsuario.put('/actualizarUsuario/:id_usuario',validarToken, validarUsu,actualizarUsuario);
 rutaUsuario.get('/buscarUsuario/:id_usuario',validarToken, buscarUsuario);
 

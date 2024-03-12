@@ -28,44 +28,45 @@ export const registrarProduccion = async (req, res) => {
 
         if (!error.isEmpty()) {
             return res.status(400).json({
-                errors: error.array() 
+                errors: error.array()
             });
         }
 
         const { cantidad_produccion, precio, fk_variedad_cultivo } = req.body;
 
-        const[variedadExiste]= await pool.query('SELECT * FROM variedad WHERE id_varidad = ?'[fk_variedad_cultivo])
-        if(variedadExiste.length===0){
+        const [variedadExiste] = await pool.query('SELECT * FROM variedad WHERE id_variedad = ?', [fk_variedad_cultivo]);
+
+        if (variedadExiste.length === 0) {
             return res.status(404).json({
-                status:404,
-                message:'este id no existe porfabor registrar variedad'
-            })
+                status: 404,
+                message: 'Este ID no existe. Por favor, registre la variedad primero.'
+            });
         }
 
         if (!cantidad_produccion || !precio || !fk_variedad_cultivo) {
             return res.status(400).json({
-                message: 'se requieren los campos'
+                message: 'Se requieren todos los campos para registrar la producción.'
             });
         }
 
-        const [Registrar] = await pool.query('INSERT INTO produccion(cantidad_produccion,precio,fk_variedad_cultivo) Values(?,?,?)',
+        const [Registrar] = await pool.query('INSERT INTO produccion (cantidad_produccion, precio, fk_variedad_cultivo) VALUES (?, ?, ?)',
             [cantidad_produccion, precio, fk_variedad_cultivo]);
 
         if (Registrar.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'se Registró correctamente'
+                message: 'Se registró correctamente la producción.'
             });
         } else {
             res.status(400).json({
                 status: 400,
-                message: 'No se ha podido registrar'
+                message: 'No se ha podido registrar la producción.'
             });
         }
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: 'error en el servidor'
+            message: 'Error en el servidor'
         });
         console.log(error);
     }
@@ -82,7 +83,7 @@ export const BuscarProduccion = async (req, res) => {
         } else {
             res.status(404).json({
                 status: 404,
-                message: "No se encontraron resultados para la fecha ",
+                message: "No se encontraron resultados con el id ",
             });
         }
     } catch (error) {
@@ -93,56 +94,81 @@ export const BuscarProduccion = async (req, res) => {
     }
 };
 
+
 export const actualizarProduccion = async (req, res) => {
     try {
-        const error = validationResult(req);
-        if (!error.isEmpty()) {
-            return res.status(400).json({ error: error.array() });
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
         }
 
         const { id_produccion } = req.params;
         const { cantidad_produccion, precio, fk_variedad_cultivo } = req.body;
 
-        if (!cantidad_produccion && !precio && !fk_variedad_cultivo) {
+        if (!cantidad_produccion && !precio && !fk_variedad_cultivo ) {
             return res.status(400).json({
-                message: 'se requiere uno de los campos para actualizar (cantidad , precio , variedad cultivo)'
+                message: 'se requiere uno de los campos para actualizar (cantidad_produccion, precio, fk_variedad_cultivo)'
             });
         }
 
-        const [addProduccion] = await pool.query('SELECT * FROM produccion WHERE id_produccion=?', [id_produccion]);
+        // Verificar si la producción a actualizar existe
+        const [produccionExistente] = await pool.query('SELECT * FROM produccion WHERE id_produccion=?', [id_produccion]);
 
-        if (addProduccion.length === 0) {
-            return res.status(400).json({ status: 400, message: 'Producción no encontrada' });
+        if (produccionExistente.length === 0) {
+            return res.status(404).json({
+                status: 404,
+                message: 'Producción no encontrada. El ID proporcionado no existe.'
+            });
         }
 
-        const UpdateValue = {
-            cantidad_produccion: cantidad_produccion || addProduccion[0].cantidad_produccion,
-            precio: precio || addProduccion[0].precio,
-            fk_variedad_cultivo: fk_variedad_cultivo || addProduccion[0].fk_variedad_cultivo,
+        // Verificar si los valores son diferentes para evitar realizar la misma actualización
+        if (
+            produccionExistente[0].cantidad_produccion === cantidad_produccion &&
+            produccionExistente[0].precio === precio &&
+            produccionExistente[0].fk_variedad_cultivo === fk_variedad_cultivo
+        ) {
+            return res.status(404).json({
+                status: 404,
+                message: 'No se ha realizado ningún cambio. Los datos son iguales a los existentes.'
+            });
+        }
+
+        const updateValues = {
+            cantidad_produccion: cantidad_produccion || produccionExistente[0].cantidad_produccion,
+            precio: precio || produccionExistente[0].precio,
+            fk_variedad_cultivo: fk_variedad_cultivo || produccionExistente[0].fk_variedad_cultivo,
         };
 
-        const updateQuery = 'UPDATE produccion SET cantidad_produccion=?, precio=?, fk_variedad_cultivo=? WHERE id_produccion=?'; // Corregido el updateQuery
+        const updateQuery = 'UPDATE produccion SET cantidad_produccion=?, precio=?, fk_variedad_cultivo=? WHERE id_produccion=?';
 
-        const [Actualiza] = await pool.query(updateQuery, [UpdateValue.cantidad_produccion, UpdateValue.precio, UpdateValue.fk_variedad_cultivo, id_produccion]); // Corregido el uso de UpdateValue
+        const [updatedProduccion] = await pool.query(updateQuery, [
+            updateValues.cantidad_produccion,
+            updateValues.precio,
+            updateValues.fk_variedad_cultivo,
+            id_produccion
+        ]);
 
-        if (Actualiza.affectedRows > 0) {
+        if (updatedProduccion.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: Actualiza.changedRows > 0 ? 'se actualizó con éxito' : "Sin cambios realizados",
+                message: updatedProduccion.changedRows > 0 ? 'Se actualizó con éxito' : 'Sin cambios realizados',
             });
         } else {
             res.status(400).json({
                 status: 400,
-                message: "No se encontraron resultados para la actualización",
+                message: 'No se encontraron resultados para la actualización',
             });
         }
     } catch (error) {
-        return res.status(500).json({
+        res.status(500).json({
             status: 500,
-            message: 'error en el servidor'
+            message: 'Error en el servidor',
+            error: error.message
         });
     }
 };
+
 
 export const eliminarProduccion = async (req, res) => {
     try {

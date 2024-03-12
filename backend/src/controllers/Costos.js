@@ -106,39 +106,43 @@ export const actualizarCostos = async (req, res) => {
             return res.status(400).json({ error: error.array() });
         }
 
-        const { id_costos } = req.params;
+        const {id_costos} = req.params
         const { fk_id_lotes, fk_id_recursos, egresos } = req.body;
 
         // Verificar si el fk_id_lotes existe
-        const [loteExist] = await pool.query('SELECT * FROM lotes WHERE id_lote = ?', [fk_id_lotes]);
+        if (fk_id_lotes) {
+            const [loteExist] = await pool.query('SELECT * FROM lotes WHERE id_lote = ?', [fk_id_lotes]);
 
-        if (loteExist.length === 0) {
-            return res.status(404).json({
-                status: 404,
-                message: 'El lote no existe. Registre primero un lote.'
-            });
+            if (loteExist.length === 0) {
+                return res.status(404).json({
+                    status: 404,
+                    message: 'El lote no existe. Registre primero un lote.'
+                });
+            }
         }
 
         // Verificar si el fk_id_recursos existe
-        const [recursoExist] = await pool.query('SELECT * FROM recursos WHERE id_recursos = ?', [fk_id_recursos]);
+        if (fk_id_recursos) {
+            const [recursoExist] = await pool.query('SELECT * FROM recursos WHERE id_recursos = ?', [fk_id_recursos]);
 
-        if (recursoExist.length === 0) {
-            return res.status(404).json({
-                status: 404,
-                message: 'El recurso no existe. Registre primero un recurso.'
-            });
+            if (recursoExist.length === 0) {
+                return res.status(404).json({
+                    status: 404,
+                    message: 'El recurso no existe. Registre primero un recurso.'
+                });
+            }
         }
 
         if (!fk_id_lotes && !fk_id_recursos && !egresos) {
             return res.status(400).json({
-                message: 'se requiere uno de los campos para actualizar'
+                message: 'Se requiere uno de los campos para actualizar.'
             });
         }
 
         const [addcostos] = await pool.query('SELECT * FROM costos WHERE id_costos=?', [id_costos]);
 
         if (addcostos.length === 0) {
-            return res.status(400).json({ status: 400, message: 'costo no encontrado' });
+            return res.status(400).json({ status: 400, message: 'Costo no encontrado.' });
         }
 
         const UpdateValue = {
@@ -147,28 +151,29 @@ export const actualizarCostos = async (req, res) => {
             egresos: egresos || addcostos[0].egresos,
         };
 
-        const updateQuery = 'UPDATE costos SET fk_id_lotes=?, fk_id_recursos=?, egresos=? WHERE id_costos=?'; // Corregido el updateQuery
+        const updateQuery = 'UPDATE costos SET fk_id_lotes=?, fk_id_recursos=?, egresos=? WHERE id_costos=?';
 
-        const [Actualiza] = await pool.query(updateQuery, [UpdateValue.fk_id_lotes, UpdateValue.fk_id_recursos, UpdateValue.egresos, id_costos]); // Corregido el uso de UpdateValue
+        const [Actualiza] = await pool.query(updateQuery, [UpdateValue.fk_id_lotes, UpdateValue.fk_id_recursos, UpdateValue.egresos, id_costos]);
 
         if (Actualiza.affectedRows > 0) {
             res.status(200).json({
-                "mensaje": "ha sido actualizado"
+                mensaje: 'Ha sido actualizado.'
             });
         } else {
             res.status(400).json({
                 status: 400,
-                message: "No se encontraron resultados para la actualización"
+                message: 'No se encontraron resultados para la actualización.'
             });
         }
     } catch (error) {
         return res.status(500).json({
             status: 500,
-            message: 'error en el servidor',
+            message: 'Error en el servidor.',
             error: error.message
         });
     }
 };
+
 /*
 export const eliminarProduccion = async (req, res) => {
     try {

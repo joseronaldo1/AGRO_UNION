@@ -81,6 +81,12 @@ export const actualizarUsuario = async (req, res) => {
         const { id_usuario } = req.params;
         const { nombre, apellido, correo, password, rol, estado } = req.body;
 
+        if (!nombre && !apellido && !correo && !password && !rol && !estado  ) {
+            return res.status(400).json({
+                message: 'se requiere uno de los campos para actualizar (nombre, apellido, correo, password, rol, estado)'
+            });
+        }
+
         const [oldUsuario] = await pool.query("SELECT * FROM usuarios WHERE id_usuario = ?", [id_usuario]);
 
         if (oldUsuario.length === 0) {

@@ -4,48 +4,52 @@ import {validationResult} from "express-validator"
 // CRUD - Registrar
 export const registrarAsignacion = async (req, res) => {
     try {
-
-        const errors= validationResult(req);
-        if(!errors.isEmpty()){
-            return res.status(400).json(errors);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
         }
 
         const { fecha_inicio, fecha_fin, fk_id_usuario, fk_actividad, estado } = req.body;
+
+        // Verificar si el usuario existe
+        const [usuarioExist] = await pool.query('SELECT * FROM usuarios WHERE id_usuario = ?', [fk_id_usuario]);
+        if (usuarioExist.length === 0) {
+            return res.status(404).json({
+                status: 404,
+                message: "El usuario no existe. Registre primero un usuario."
+            });
+        }
+
+        // Verificar si la actividad existe
+        const [actividadExist] = await pool.query('SELECT * FROM actividad WHERE id_actividad = ?', [fk_actividad]);
+        if (actividadExist.length === 0) {
+            return res.status(404).json({
+                status: 404,
+                message: "La actividad no existe. Registre primero una actividad."
+            });
+        }
+
         const [result] = await pool.query("INSERT INTO asignacion (fecha_inicio, fecha_fin, fk_id_usuario, fk_actividad, estado) VALUES (?,?,?,?,?)", [fecha_inicio, fecha_fin, fk_id_usuario, fk_actividad, estado]);
 
-        const [usuarioExist] = await pool.query('SELECT * FROM usuarios where id_usuario = ?', [fk_id_usuario])
-        if(usuarioExist.length === 0) {
-            return res.status(404).json({
-                status: 404,
-                message: "El usuario no existe, registre un usuario 'D"
-            })
-        }
-        const [actividadExist] = await pool.query('SELECT * FROM actividad where id_actividad = ?', [fk_actividad])
-        if(actividadExist.length === 0) {
-            return res.status(404).json({
-                status: 404,
-                message: "La actividad no existe, registre una actividad 'D"
-            })
-        }
-        /*  */
         if (result.affectedRows > 0) {
-            res.status(200).json({
+            return res.status(200).json({
                 status: 200,
                 message: 'Se registró con éxito'
             });
         } else {
-            res.status(404).json({
+            return res.status(404).json({
                 status: 404,
                 message: 'No se registró'
             });
         }
-        } catch (error) {
-            res.status(500).json({
-                status: 500,
-                message: error.message || 'Error interno del servidor'
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: error.message || 'Error interno del servidor'
         });
     }
-}
+};
+
 
 // CRUD - Listar
 export const listarAsignacion = async (req, res) => {
@@ -77,9 +81,15 @@ export const actualizarAsignacion = async (req, res) => {
 
         const { id } = req.params;
         const { fecha_inicio, fecha_fin, fk_id_usuario, fk_actividad, estado } = req.body;
-        // Primero, obtén el registro existente para saber cuál es el valor actual de fecha_inicio
+
+        if (!fecha_inicio && !fecha_fin && !fk_id_usuario && !fk_actividad && !estado) {
+            return res.status(400).json({
+                message: 'se requiere uno de los campos para actualizar (fecha_inicio, fecha_fin, fk_id_usuario, fk_actividad, estado)'
+            });
+        }
+
         const [oldTipoRecurso] = await pool.query("SELECT * FROM asignacion WHERE id_asignacion=?", [id]);
-        // Luego, actualiza el registro con los nuevos valores, utilizando parámetros para evitar inyecciones SQL
+
         const [result] = await pool.query(`UPDATE asignacion SET fecha_inicio = ?, fecha_fin = ?, fk_id_usuario = ?, fk_actividad = ?, estado = ? WHERE id_asignacion = ?`, [fecha_inicio || oldTipoRecurso[0].fecha_inicio, fecha_fin || oldTipoRecurso[0].fecha_fin, fk_id_usuario || oldTipoRecurso[0].fk_id_usuario, fk_actividad || oldTipoRecurso[0].fk_actividad, estado || oldTipoRecurso[0].estado, id]);
         
         if (result.affectedRows > 0) {

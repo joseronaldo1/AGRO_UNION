@@ -10,7 +10,7 @@ export const ValidateCostos=[
 
 
 export const actualizar =[
-    check('fk_id_lotes','se requiere el id del lote mas un gion segido el nombre del lote registrado').optional().isInt().isNumeric(),
-    check('fk_id_recursos','ingrese el id de algun recurso registrado').optional().isInt().isNumeric(),
-    check('egresos', 'Debe ser un número').optional().notEmpty().isFloat()
+    check('fk_id_lotes','se requiere el id del lote y solo recibe numeros').optional().isInt().isNumeric(),
+    check('fk_id_recursos','ingrese el id de algun recurso y solo recibe numeros').optional().isInt().isNumeric(),
+    check('egresos', 'solo recibe numeros').optional().notEmpty().isFloat()
 ]

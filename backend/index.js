@@ -9,6 +9,8 @@ import rutaAsignacion from './src/routes/routes.asignacion.js';
 import rutaRecursos from './src/routes/routes.Recursos.js'; 
 import { rutaDeTipoRecurso } from './src/routes/TipoRecurso.route.js';
 import { rutaDeActividad } from './src/routes/Actividad.route.js';
+import { produccion } from './src/routes/produccion.routes.js';
+import rutaDeVariedad from './src/routes/variedad.routes.js';
 
 
 
@@ -37,8 +39,9 @@ servidor.use(rutaAsignacion)
 servidor.use(rutaRecursos) 
 servidor.use(rutaDeTipoRecurso)
 servidor.use(rutaDeActividad)
+servidor.use(produccion)
+servidor.use(rutaDeVariedad)
 
-
-servidor.listen(4000, () =>{
+servidor.listen(3000, () =>{
     console.log("esta funcionando")
 })

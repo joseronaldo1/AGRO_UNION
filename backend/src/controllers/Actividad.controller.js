@@ -131,6 +131,16 @@ export const DesactivarA = async (req, res) => {
         const { id } = req.params;
         const { estado } = req.body;
 
+        // Realiza una consulta para obtener la variedad de cultivo antes de actualizarla
+        const [oldActivida] = await pool.query("SELECT * FROM actividad WHERE id_actividad=?", [id]);
+
+        if (oldActivida.length === 0) {
+            return res.status(404).json({
+                status: 404,
+                message: 'Actividad no encontrada',
+            });
+        }
+
         const [oldActividad] = await pool.query("SELECT * FROM actividad WHERE id_actividad = ?", [id]); 
         
         const [result] = await pool.query(

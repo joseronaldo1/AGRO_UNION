@@ -9,7 +9,7 @@ export const validarRR = [
         check('valor_actividad', 'El campo de valor de actividad debe ser un número').isInt().isNumeric(),
         check('fk_id_recursos', 'El campo de identificación de tipo de recurso debe ser un número entero').isInt(),
 
-        check('estado', 'El campo de estado debe ser "activo" o "inactivo"').optional().isIn(['activo', 'inactivo'])
+        check('estado', 'El campo de estado debe ser "activo" o "inactivo"').isIn(['activo', 'inactivo'])
     ];
     
 //ACTUALIZAR
