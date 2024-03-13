@@ -26,7 +26,7 @@ export const RegistrarA = async (req, res) => {
             return res.status(400).json(errors);
         }
 
-        const { actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, fk_id_recursos, estado } = req.body;
+        const { actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, estado } = req.body;
 
         // Si no se proporciona un valor para 'rol', establecerlo como 'activo'
         const esta = estado || 'activo';
@@ -40,17 +40,9 @@ export const RegistrarA = async (req, res) => {
                  message: 'la variedad no existe. Registre primero una variedad.'
              });
          }
-         // fk recursos
-         const [recurExist] = await pool.query('SELECT * FROM recursos WHERE id_recursos = ?', [fk_id_recursos]);
-
-         if (recurExist.length === 0) {
-             return res.status(404).json({
-                 status: 404,
-                 message: 'el recurso no existe. Registre primero un recurso.'
-             });
-         }
         
-        const [result] = await pool.query("INSERT INTO actividad (actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, fk_id_recursos, estado) VALUES (?, ?, ?, ?, ?, ?, ?)", [actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, fk_id_recursos, esta]);
+        
+        const [result] = await pool.query("INSERT INTO actividad (actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, estado) VALUES (?, ?, ?, ?, ?, ?)", [actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, esta]);
 
         if (result.affectedRows > 0) {
             res.status(200).json({
@@ -81,7 +73,7 @@ export const ActualizarA = async (req, res) => {
         }
 
         const { id } = req.params;
-        const { actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, fk_id_recursos  } = req.body;
+        const { actividad, tiempo, observaciones, fk_id_variedad, valor_actividad  } = req.body;
 
         // Realiza una consulta para obtener la variedad de cultivo antes de actualizarla
         const [oldActividad] = await pool.query("SELECT * FROM actividad WHERE id_actividad=?", [id]);
@@ -100,8 +92,7 @@ export const ActualizarA = async (req, res) => {
             tiempo = ${tiempo !== undefined ? `'${tiempo}'` : 'tiempo'},
             observaciones = ${observaciones ? `'${observaciones}'` : `'${oldActividad[0].observaciones}'`},
             fk_id_variedad = ${fk_id_variedad ? `'${fk_id_variedad}'` : `'${oldActividad[0].fk_id_variedad}'`},
-            valor_actividad = ${valor_actividad ? `'${valor_actividad}'` : `'${oldActividad[0].valor_actividad}'`},
-            fk_id_recursos = ${fk_id_recursos ? `'${fk_id_recursos}'` : `'${oldActividad[0].fk_id_recursos}'`}
+            valor_actividad = ${valor_actividad ? `'${valor_actividad}'` : `'${oldActividad[0].valor_actividad}'`}
             WHERE id_actividad = ?`,
             [id]
         );
