@@ -89,6 +89,28 @@ export const actualizarProgramacion = async (req, res) => {
         // Luego, actualiza el registro con los nuevos valores, utilizando parámetros para evitar inyecciones SQL
         const [result] = await pool.query(`UPDATE programacion SET fecha_inicio = ?, fecha_fin = ?, fk_id_usuario = ?, fk_actividad = ?, fk_id_cultivo = ?, estado = ? WHERE id_programacion = ?`, [fecha_inicio || oldTipoRecurso[0].fecha_inicio, fecha_fin || oldTipoRecurso[0].fecha_fin, fk_id_usuario || oldTipoRecurso[0].fk_id_usuario, fk_actividad || oldTipoRecurso[0].fk_actividad, fk_id_cultivo || oldTipoRecurso[0].fk_id_cultivo, estado || oldTipoRecurso[0].estado, id]);
         
+        const [usuarioExist] = await pool.query('SELECT * FROM usuarios where id_usuario = ?', [fk_id_usuario])
+        if(usuarioExist.length === 0) {
+            return res.status(404).json({
+                status: 404,
+                message: "El usuario no existe, registre un usuario 'D"
+            })
+        }
+        const [actividadExist] = await pool.query('SELECT * FROM actividad where id_actividad = ?', [fk_actividad])
+        if(actividadExist.length === 0) {
+            return res.status(404).json({
+                status: 404,
+                message: "La actividad no existe, registre una actividad 'D"
+            })
+        }
+        const [cultivoExist] = await pool.query('SELECT * FROM cultivo where id_cultivo = ?', [fk_id_cultivo])
+        if(cultivoExist.length === 0) {
+            return res.status(404).json({
+                status: 404,
+                message: "El cultivo no existe, registre una actividad 'D"
+            })
+        }
+        
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
