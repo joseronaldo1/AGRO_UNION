@@ -100,7 +100,7 @@
         json:
         [
         {
-            "fk_id_tipo_recursos":1,
+            "id_tipo_recursos":1,
             "nombre_recursos":"abono liquido",
             "cantidad_medida":12, 
             "unidades_medidas":"litro",
@@ -141,8 +141,8 @@
         Status: 200
         json:
         [
-        {"fk_id_tipo_recursos":1,"nombre_recursos":"abono liquido","cantidad_medida":12, "unidades_medidas":"litro","extras":"mensaje opcional"},
-        {"fk_id_tipo_recursos":2,"nombre_recursos":"veneno","cantidad_medida":12, "unidades_medidas":"ml","extras":"mensaje opcional"}
+        {"id_tipo_recursos":1,"nombre_recursos":"abono liquido","cantidad_medida":12, "unidades_medidas":"litro","extras":"mensaje opcional"},
+        {"id_tipo_recursos":2,"nombre_recursos":"veneno","cantidad_medida":12, "unidades_medidas":"ml","extras":"mensaje opcional"}
         ]
     <br>
     Incorrecto:
@@ -178,7 +178,7 @@
         <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
         <tr><td>Header</td>  <td>Token:token</td></tr>
         <tr><td>Usuarios</td> <td>Administrador</td></tr>
-        <tr><td>Request json</td>  <td>{"actividad":"guadañar","tiempo":"18:32:52", "observaciones":"bien trabajadito", "fk_id_variedad":1, "valor_actividad":20000}</td></tr>
+        <tr><td>Request json</td>  <td>{"nombre_actividad":"guadañar","tiempo":"18:32:52", "observaciones":"bien trabajadito", "fk_id_variedad":1, "valor_actividad":20000}</td></tr>
         <tr><td>Respuesta json</td>  <td>   
         Correcto: 
         Status: 200
@@ -216,7 +216,7 @@
         <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
         <tr><td>Header</td>  <td>Token:token</td></tr>
         <tr><td>Usuario</td><td>Administrador</td></tr>
-        <tr><td>Request json</td>  <td>{ "actividad":"palear","tiempo":"10:32:52", "observaciones":"trabaje arto pa pagarle", "fk_id_variedad":1, "valor_actividad":50000 }</td></tr>
+        <tr><td>Request json</td>  <td>{ "nombre_actividad":"palear","tiempo":"10:32:52", "observaciones":"trabaje arto pa pagarle", "fk_id_variedad":1, "valor_actividad":50000 }</td></tr>
         <tr><td>Respuesta json</td>  <td>   
         Correcto: 
         Status: 200
@@ -301,7 +301,7 @@
         json:
         [
         "id_actividad": 3,
-        "actividad":"guadañar",
+        "nombre_actividad":"guadañar",
         "tiempo": "18:32:52",
         "observaciones": "shdhja",
         "valor_actividad": 3424,
@@ -344,7 +344,7 @@
         [
             {
                 "id_actividad": 1,
-                "actividad":"guadañar",
+                "nombre_actividad":"guadañar",
                 "tiempo": "18:32:52",
                 "observaciones": "null",
                 "valor_actividad": 3424,
@@ -353,7 +353,7 @@
             },
             {
                 "id_actividad": 2,
-                "actividad":"fumigar",
+                "nombre_actividad":"fumigar",
                 "tiempo": "18:32:52",
                 "observaciones": "sin obsercacionez",
                 "valor_actividad": 3424,
