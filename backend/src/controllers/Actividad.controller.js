@@ -26,7 +26,7 @@ export const RegistrarA = async (req, res) => {
             return res.status(400).json(errors);
         }
 
-        const { actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, estado } = req.body;
+        const { nombre_actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, estado } = req.body;
 
         // Si no se proporciona un valor para 'rol', establecerlo como 'activo'
         const esta = estado || 'activo';
@@ -42,7 +42,7 @@ export const RegistrarA = async (req, res) => {
          }
         
         
-        const [result] = await pool.query("INSERT INTO actividad (actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, estado) VALUES (?, ?, ?, ?, ?, ?)", [actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, esta]);
+        const [result] = await pool.query("INSERT INTO actividad (nombre_actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, estado) VALUES (?, ?, ?, ?, ?, ?)", [nombre_actividad, tiempo, observaciones, fk_id_variedad, valor_actividad, esta]);
 
         if (result.affectedRows > 0) {
             res.status(200).json({
@@ -73,7 +73,7 @@ export const ActualizarA = async (req, res) => {
         }
 
         const { id } = req.params;
-        const { actividad, tiempo, observaciones, fk_id_variedad, valor_actividad  } = req.body;
+        const { nombre_actividad, tiempo, observaciones, fk_id_variedad, valor_actividad  } = req.body;
 
         // Realiza una consulta para obtener la variedad de cultivo antes de actualizarla
         const [oldActividad] = await pool.query("SELECT * FROM actividad WHERE id_actividad=?", [id]);
@@ -88,7 +88,7 @@ export const ActualizarA = async (req, res) => {
         // Realiza la actualización en la base de datos
         const [result] = await pool.query(
             `UPDATE actividad
-            SET actividad = ${actividad ? `'${actividad}'` : `'${oldActividad[0].actividad}'`}, 
+            SET actividad = ${nombre_actividad ? `'${nombre_actividad}'` : `'${oldActividad[0].nombre_actividad}'`}, 
             tiempo = ${tiempo !== undefined ? `'${tiempo}'` : 'tiempo'},
             observaciones = ${observaciones ? `'${observaciones}'` : `'${oldActividad[0].observaciones}'`},
             fk_id_variedad = ${fk_id_variedad ? `'${fk_id_variedad}'` : `'${oldActividad[0].fk_id_variedad}'`},
