@@ -1,0 +1,51 @@
+/* Menu.css */
+.dropdown-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 180px;
+<<<<<<< HEAD
+  height: 95%;
+  background-color: #d8d8d8;
+  z-index: 999;
+  padding: 15px;
+  overflow-y: auto; /* Añadido para permitir el desplazamiento vertical si el menú es demasiado largo */
+=======
+  height: 915px;
+  background-color: #d8d8d8;
+  z-index: 999;
+  padding: 15px;
+>>>>>>> 37a719dee3ea6a8c50409ea6d8e1de397721b6be
+}
+
+.close-icon {
+  margin-left: 170px;
+  font-size: 1.4em;
+  cursor: pointer;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f2f2f2;
+  border-radius: 20px;
+  color: green;
+}
+
+.iconos {
+  margin-top: 10px;
+}
+
+.cerrarSesion {
+<<<<<<< HEAD
+  margin-top: 10px; /* Ajustado para evitar cubrir demasiado contenido */
+}
+=======
+  margin-top: 400px;
+}
+>>>>>>> 37a719dee3ea6a8c50409ea6d8e1de397721b6be

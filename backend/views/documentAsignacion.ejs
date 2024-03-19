@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentacion API</title>
+  <link rel="stylesheet" href="style.css">
+<body>
+  <hr>
+  <h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR ASIGNACIONES</h3>
+  <table>
+      <tr><td>Número</td> <td>1</td></tr>
+      <tr><td>Nombre del Servicio</td>  <td>REGISTRAR ASIGNACIONES</td></tr>
+      <tr><td>URL</td>  <td>/registrarAsignacion</td></tr>
+      <tr><td>Descripción</td>  <td>Permite registrar un nuevo recurso utilizado en la base de datos</td></tr>
+      <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
+      <tr><td>Header</td>  <td>Token:</td></tr>
+      <tr><td>Usuarios</td>  <td>Administrador</td></tr>
+      <tr><td>Request json</td>  <td>{
+        "fecha_inicio": "2024-12-11", 
+        "fecha_fin": "2024-12-12", 
+        "fk_id_usuario": 1, 
+        "fk_actividad": 1
+      }</td></tr>
+      <tr><td>Respuesta json</td>  <td>   
+      Correcto: 
+      Status: 200
+      json:
+      {
+        "status": 200,
+        "message": "Se registró con éxito"
+      }
+  <br>
+  Incorrecto:
+  
+  Status: 404
+  json:{
+      "status": 404,
+      "message" : "No se registró"
+  }
+  <br>
+  Error: 
+  
+  Status: 500 
+  json: {
+      "status": 500,
+      "message" : "Error interno del servidor"
+  }
+  </td></tr>
+  <tr><td>Programador</td>  <td>Dario Jose Zamora V - devdjzv</td></tr>
+  </table>
+  
+  
+  
+  <br>
+  
+  
+  
+  
+  <h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR ASIGNACIONES</h3>
+  <table>
+      <tr><td>Número</td> <td>2</td></tr>
+      <tr><td>Nombre del Servicio</td>  <td>Actualizar ASIGNACIONES</td></tr>
+      <tr><td>URL</td>  <td>actualizarAsignacion/:id</td></tr>
+      <tr><td>Descripción</td>  <td>Permite actualizar una asiganción existente en la base de datos</td></tr>
+      <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+      <tr><td>Header</td>  <td>Token:</td></tr>
+      <tr><td>Usuarios</td>  <td>Administrador</td></tr>
+      <tr><td>Request json</td>  <td>{
+        "fecha_inicio": "2050-12-11", 
+        "fecha_fin": "2050-12-12", 
+        "fk_id_usuario": 1, 
+        "fk_actividad": 1
+      }</td></tr>
+      <tr><td>Respuesta json</td>  <td>   
+      Correcto: 
+      Status: 200
+      json:
+      {
+        "status": 200,
+        "message": "Se actualizó con éxito"
+      }
+  <br>
+  Incorrecto:
+  
+  Status: 404
+  json:{
+      "status": 404,
+      "message" : "No se encontró el registro para actualizar"
+  }
+  <br>
+  Error: 
+  
+  Status: 500 
+  json: {
+      "status": 500,
+      "message" : "Error interno del servidor"
+  }
+  </td></tr>
+  <tr><td>Programador</td>  <td>Dario Jose Zamora V - devdjzv</td></tr>
+  </table>
+  
+  <h3>Requerimiento 3. Documentacion ENDPOINT ESTADO ASIGNACIONES</h3>
+  <table>
+  <tr><td>Número</td> <td>3</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>ESTADO ASIGNACIONES</td></tr>
+  <tr><td>URL</td>  <td>/ESTADO/Asignacion/:id</td></tr>
+  <tr><td>Descripción</td>  <td>Permite cambiar el estado utilizado existente en la base de datos</td></tr>
+  <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+  <tr><td>Header</td>  <td>Token:</td></tr>
+  <tr><td>Usuarios</td>  <td>Administrador</td></tr>
+  <tr><td>Request json</td>  <td>{"estado": 'acabo', 'noacabo', 'proceso'}</td></tr>
+  <tr><td>Respuesta json</td>  <td>   
+  Correcto: 
+  Status: 200
+  json:
+  {
+    "status": 200,
+    "message": "El estado se realizó correctamente"
+  }
+  <br>
+  Incorrecto:
+  
+  Status: 404
+  json:{
+  "status": 404,
+  "message" : "El estado no se realizo correctamente"
+  }
+  <br>
+  Error: 
+  
+  Status: 500 
+  json: {
+  "status": 500,
+  "message" : "Error interno del servidor"
+  }
+  </td></tr>
+  <tr><td>Programador</td>  <td>Dario Jose Zamora V - devdjzv</td></tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <br>
+  
+  
+  
+  
+  <h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR ASIGNACIONES</h3>
+  <table>
+  <tr><td>Número</td> <td>4</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Buscar ASIGNACIONES</td></tr>
+  <tr><td>URL</td>  <td>/buscarAsignacion/:id</td></tr>
+  <tr><td>Descripción</td>  <td>Permite buscar una asignacion utilizado por su id en la base de datos</td></tr>
+  <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+  <tr><td>Header</td>  <td>Token:</td></tr>
+  <tr><td>Usuarios</td>  <td>Administrador</td></tr>
+  <tr><td>Request json</td>  <td>{Null}</td></tr>
+  <tr><td>Respuesta json</td>  <td>   
+  Correcto: 
+  Status: 200
+  json:
+[
+  {
+    "id_asignacion": 16,
+    "fecha_inicio": "2024-03-31T05:00:00.000Z",
+    "fecha_fin": "2024-03-31T05:00:00.000Z",
+    "estado": "",
+    "fk_id_usuario": 2,
+    "fk_actividad": 2
+  }
+]
+  <br>
+  Incorrecto:
+  
+  Status: 404
+  json:{
+  "status": 404,
+  "message" : "No se encontraron resultados para la búsqueda"
+  }
+  <br>
+  Error: 
+  
+  Status: 500 
+  json: {
+  "status": 500,
+  "message" : "Error interno del servidor"
+  }
+  </td></tr>
+  <tr><td>Programador</td>  <td>Dario Jose Zamora V - devdjzv</td></tr>
+  </table>
+  
+    
+  <br>
+  
+  
+  <h3>Requerimiento 5. Documentacion ENDPOINT LISTAR ASIGNACIONES</h3>
+  <table>
+  <tr><td>Número</td> <td>5</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Listar ASIGNACIONES</td></tr>
+  <tr><td>URL</td>  <td>/listarAsignacion</td></tr>
+  <tr><td>Descripción</td>  <td>Permite obtener una lista de todas las asignaciones registradas en la base de datos</td></tr>
+  <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+  <tr><td>Header</td>  <td>Token:</td></tr>
+  <tr><td>Usuarios</td>  <td>Administrador</td></tr>
+  <tr><td>Request json</td>  <td>Null</td></tr>
+  <tr><td>Respuesta json</td>  <td>   
+  Correcto: 
+  Status: 200
+  json:[  
+  {
+    "id_asignacion": 16,
+    "fecha_inicio": "2024-03-31T05:00:00.000Z",
+    "fecha_fin": "2024-03-31T05:00:00.000Z",
+    "estado": "noacabo",
+    "fk_id_usuario": 2,
+    "fk_actividad": 2
+  },
+  {
+    "id_asignacion": 17,
+    "fecha_inicio": "2050-12-11T05:00:00.000Z",
+    "fecha_fin": "2050-12-12T05:00:00.000Z",
+    "estado": "acabo",
+    "fk_id_usuario": 2,
+    "fk_actividad": 2
+  }
+]
+  <br>
+  Incorrecto:
+  
+  Status: 404
+  json:{
+    "status": 404,
+    "message": "No hay ninguna asignacion"
+  }
+  <br>
+  Error: 
+  
+  Status: 500 
+  json: {
+  "status": 500,
+  "message" : "Error interno del servidor"
+  }
+  </td></tr>
+  <tr><td>Programador</td>  <td>Dario Jose Zamora V - devdjzv</td></tr>
+  </table>
+</body>
+</html>
