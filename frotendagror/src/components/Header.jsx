@@ -4,7 +4,7 @@ import LogoHeader from '../assets/icons/logoOrigi.png'
 import { Link } from 'react-router-dom';
 
 
-export const Dashboard = () => {
+export const Header = (props) => {
   return (
 <div>
     <div className="bg-[#008000] w-full h-55 flex items-center justify-between">
