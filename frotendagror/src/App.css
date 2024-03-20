@@ -1,6 +1,5 @@
 .nav-menu.active{
   left: 0;
-<<<<<<< HEAD
   transition: 550ms;
   scroll-behavior: smooth;
   z-index: 500;
@@ -13,27 +12,24 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-=======
-  transition: 350ms;
-  scroll-behavior: smooth;
-}
-
-.nav-menu{
-  background-color: #39A900;
-  width: 250px;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
->>>>>>> devkvd
   position: fixed;
   top: 0;
   left: -100%;
   transition: 850ms;
-<<<<<<< HEAD
   scroll-behavior: smooth;
   z-index: 500;
 }
+/* .nav-menu{
+  background-color: #BEC3C7;
+  width: 350px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 350ms;
+  scroll-behavior: smooth;
+  left: -100%;
+} */
 
 .nav-menu-user.active{
   right: 0;
@@ -81,6 +77,3 @@
   height: 100vh;
   position: fixed;
 }
-=======
-}
->>>>>>> devkvd

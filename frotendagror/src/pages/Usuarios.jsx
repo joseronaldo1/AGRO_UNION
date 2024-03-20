@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DataTable from "react-data-table-component";
 import { HeaderLogin } from "../components/HeaderLogin.jsx";
 import { FaSearch } from "react-icons/fa"; // Importa el icono FaSearch
+import { Header } from "../components/Header.jsx";
 
 
 export function Usuario() {
@@ -162,7 +163,7 @@ function handleFilter(event) {
   }
   return (
     <div>
-      <HeaderLogin title="Usuarios" />
+     { <Header />}
       <div className="w-10/12 ml-28 ">
         {/* Campo de búsqueda */}
         <div className='w-96 bg-[#E5E5E5] flex items-center m-8 rounded-lg border-black '>
