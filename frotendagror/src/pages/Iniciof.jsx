@@ -11,7 +11,7 @@ export const Iniciof = () => {
         backgroundPosition:'center',
         backgroundRepeat: 'no-repeat',
         height: '100vh', // Ajusta la altura según sea necesario
-        width: '100vw' // Ajusta el ancho según sea necesario
+        width: '100%' // Ajusta el ancho según sea necesario
     };
 
     return (
